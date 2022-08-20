@@ -20,9 +20,14 @@
   {% block content %}
   <body>
     <div class="body-container">
+      <div class="index_imgs_crop">
+        <img class="rain_pattern" src="{% static 'wa_anwa/img/index_imgs/1_로그인_비무늬.png' %}"/>
+        <img class="index_umb" src="{% static 'wa_anwa/img/index_imgs/1_로그인_우산.png' %}"/>
+        <img class="index_logo" src="{% static 'wa_anwa/img/index_imgs/0_로고.png' %}"/>
+      </div>
       <div id="kakao-login-button">
         <a href="{% url 'kakao-login' %}">
-          <img id="kakao-button" src="{% static 'wa_anwa/img/kakao_login_btn.png' %}"/>
+          <img id="kakao-button" src="{% static 'wa_anwa/img/index_imgs/1_로그인_로그인버튼.png' %}"/>
         </a>
       </div>
     </div>
