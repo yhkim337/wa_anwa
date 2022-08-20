@@ -1,16 +1,30 @@
 from django.shortcuts import render
 from accounts.models import User
 import datetime
-from models import Betting,Participate,Answer,Result
+from wa_anwa.models import Betting,Participate,Answer,Result
+from django.http import JsonResponse
+
 
 # Create your views here.
+
+def time():
+    now = datetime.datetime.now()
+    today8am = now.replace(hour=8, minute=0, second=0, microsecond=0)
+    today6pm = now.replace(hour=18, minute=0, second=0, microsecond=0)
+    if now < today8am:
+        return JsonResponse({'time':today8am})
+    elif now >= today8am and now < today6pm:
+        return JsonResponse({'time':today6pm})
+    else:
+        return JsonResponse({'time':today8am + datetime.timedelta(days=1)})
+
 def index(request):
     return render(request, 'wa_anwa/index.html')
 
 def ranking(request):
 
     #  유저 모델을 불러옴
-    users = ServiceUser.objects.all()
+    users = User.objects.all()
     # users.sort(key = lambda x:x[0])
     len_user = len(users)
 
@@ -72,7 +86,7 @@ def ranking(request):
 def my_page(request):
     # 유저 객체를 불어와서 전달
     now_user = request.user
-    my_user = ServiceUser.objects.get(pk = now_user.pk)
+    my_user = User.objects.get(pk = now_user.pk)
 
     # 이번 달에 진행한 배팅을 모두 불러온다.
     today = datetime.date.today()
@@ -105,10 +119,15 @@ def my_page(request):
 
 
 
-def home(request):
+def map(request):
     user = request.user
     if user.is_authenticated:
-         return render(request, 'wa_anwa/home.html')
+        participate = Participate.objects.filter(user = user).last()
+        lastResult = Result.objects.filter(participation=participate)
+        if lastResult.checked:
+            return render(request, 'wa_anwa/map.html')
+        else: 
+            lastResult.checked = True
+            return render(request, 'wa_anwa/result.html')
     else:
         return render(request, 'wa_anwa/index.html')
-
