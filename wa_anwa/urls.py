@@ -6,4 +6,7 @@ app_name='wa_anwa'
 urlpatterns = [
     path('index/', views.index, name='index'), 
     path('', views.home, name='home'),
+    path('ranking/', views.ranking, name = "ranking"),
+    path('mypage/', views.mypage, name='mypage')
+
 ]

@@ -1,7 +1,9 @@
 from django.shortcuts import render
 import datetime
-from models import Betting,Participate,Answer,Result
+from datetime import date
+from wa_anwa.models import Betting,Participate,Answer,Result
 from accounts.models import User
+import calendar as cd
 
 # Create your views here.
 
@@ -21,96 +23,154 @@ def ranking(request):
 
     # 이번 달에 진행한 배팅을 모두 불러온다.
     today = datetime.date.today()
+    year = today.year
     m = today.month
-    bettings = Betting.objects.filter(date_year='2022', date_month = m)
+    bettings = Betting.objects.filter(date__year= str(year),
+                      date__month=str(m))
+    
    
     # 사용자 별로 이번 달의 배팅 안에서 연결된 Participate 불러오기 
+
+
+    # print("betting:",bettings)
     for k in range(len_user):
         temp_user = users[k]
+        user_pk = temp_user.pk
         for i in range(len(bettings)):
             user_betting = bettings[i]
-            participates = Participate.objects.filter(betting = user_betting)
+            participates = Participate.objects.filter(betting = user_betting,user = temp_user )
+            # print('participates:', participates)
             for j in range(len(participates)):
                 participate = participates[j]
-                result = Result.filter(participation = participate)
-                all_Participate[temp_user.pk] += result.point
+                    # result = participate.result
+                result = Result.objects.get(participation = participate)
+                # print('user_pk:',temp_user.pk)
+                all_Participate[user_pk-1] += result.point
 
                 # 적중률 계산을 위해서 성공 실패 횟수를 저장
                 if result.win == True:
-                    all_HitRate[0][temp_user.pk] += 1
+                    all_HitRate[0][user_pk-1] += 1
                 elif result.win == False:
-                    all_HitRate[1][temp_user.pk] += 1
+                    all_HitRate[1][user_pk-1] += 1
+                
 
 
-
+    export_ranking = []
     ranking = []
+    ranking_Num = []
+    ranking_HitRate = []
 
+    
+    copy_all_Participate = all_Participate.copy()
     # ranking 배열에 달의 포인트, 적중률, user 정보를 내림차순으로 넣어준다 
     for i in range(len(all_Participate)):
         max_num = max(all_Participate)
-        index =  all_Participate.index(max_num)
-        hitrate = all_HitRate[i][0] // all_HitRate[i][0] + all_HitRate[i][1]
-        temp = [max,hitrate,users[index]]
-        ranking.append(temp)
+        index =  copy_all_Participate.index(max_num)
+        if all_HitRate[0][i] == 0:
+            hitrate = 0
+        else:
+            hitrate = all_HitRate[0][i]/(all_HitRate[0][i] + all_HitRate[1][i]) *100
+        
+        ranking.append(users[index])
+        temp = [i+1,users[index], max_num, hitrate]
+        export_ranking.append(temp)
+     
+
         all_Participate.remove(max_num)
+    
     
     # 현재 유저 찾기
     now_user = request.user
     user_pk = now_user.pk
-    user_ranking = []
+  
 
     # user_ranking 배열에 현재 접속한 유저의 등수, 포인트, 적중률, user 정보를 넣어준다
     for i in range(len(ranking)):
-        temp = ranking[i][2]
+        temp = ranking[i]
+        print(temp,temp.pk, temp.point)
         if temp.pk == user_pk:
-            user_ranking.append(i)
-            user_ranking.append(temp)
+            
+            user_ranking = temp
+            user_ranking_Num = i
+            user_HitRate = all_HitRate[0][temp.pk-1]/(all_HitRate[0][temp.pk-1] + all_HitRate[1][temp.pk-1]) *100
+            user_Point = copy_all_Participate[temp.pk-1]
+            break
 
-    return render( request, 'wa_anwa/ranking.html', {'ranking':ranking, 'user_ranking':user_ranking, 'month': m })
+    return render( request, 'wa_anwa/ranking.html', { 'export_ranking': export_ranking,'ranking':ranking,'ranking_Num':ranking_Num, 'ranking_HitRate': ranking_HitRate, 'user_ranking':user_ranking,'user_ranking_Num':user_ranking_Num ,'user_HitRate':user_HitRate , 'user_Point': user_Point ,'month': m })
 
 
-def my_page(request):
+def mypage(request):
     # 유저 객체를 불어와서 전달
     now_user = request.user
     my_user = User.objects.get(pk = now_user.pk)
 
     # 이번 달에 진행한 배팅을 모두 불러온다.
     today = datetime.date.today()
+    year = today.year
     m = today.month
-    bettings = Betting.objects.filter(date_year='2022', date_month = m)
+    bettings = Betting.objects.filter(date__year= str(year),
+                      date__month=str(m))
 
     # 이번 달 진행한 배팅을 불러와 적중률 계산하고 달력 표시용 데이터 수집
-    hitRate = []
-    calender = [[0]*31 for _ in range(2)]
+    hitRate = [0,0]
+    calender = [[0]*3 for _ in range(31)]
 
     for i in range(31):
-        calender[1][i] = i
-
+        calender[i][1] = i+1
 
     for i in range(len(bettings)):
             user_betting = bettings[i]
-            day= user_betting.date.day()
+            day= user_betting.date.day
+            # participates = user_betting.participates
+
             participates = Participate.objects.filter(betting = user_betting)
-            for j in range(len(participates)):
-                participate = participates[j]
-                result = Result.filter(participation = participate)
+            if len(participates) != 0:
+                for j in range(len(participates)):
+                    participate = participates[j]
+                    # result = participate.result
+                    result = Result.objects.get(participation = participate)
                 
-                # 적중률 계산을 위해서 성공 실패 횟수를 저장
-                if result.win == True:
-                    hitRate[0] += 1
-                    calender[0][day] = True
+                    # 적중률 계산을 위해서 성공 실패 횟수를 저장
+                    if result.win == participate.choice:
+                        hitRate[0] += 1
+                        calender[day][0] = 1
+                        calender[day][2] = participate.point
 
-                elif result.win == False:
-                    hitRate[1] += 1
-                    calender[0][day] = False
-    user_hitRate = hitRate[0]//hitRate[0] + hitRate[1]
+                    elif result.win != participate.choice:
+                        hitRate[1] += 1
+                        calender[day][0] = 2
+                        calender[day][2] = -1 * participate.point
+            elif len(participates) != 0:
+                return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'calender': calender, 'month':m})
 
 
-    # 달력 로직
+
+
+    today=date.today()
+    c=cd.Calendar(firstweekday=1)
+    monthcal=[]
+    # 주 단위로 나눠서 담기
+    for i in c.monthdayscalendar(today.year,today.month):
+        
+        weekcal=[]
+        for j in range(len(i)):
+            buffer = [0,0,0]
+            for k in range(31):
+                if i[j] == calender[k][1]:
+                    print(i[j])
+                    buffer[1] = i[j]
+                    buffer[0] = calender[k][0]
+                    buffer[2] = calender[k][2]
+                    break
+            weekcal.append(buffer)
+        monthcal.append(weekcal)
 
     
 
-    return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
+    user_hitRate = hitRate[0]/(hitRate[0] + hitRate[1]) *100
+
+
+    return render( request, 'wa_anwa/mypage.html', {'monthcal':monthcal,'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
 
 
 

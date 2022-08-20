@@ -4,23 +4,13 @@ from accounts.models import User
 
 # Create your models here.
 
-class ServiceUser(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=50)
-    photo = models.ImageField(upload_to='user/')
-    point = models.IntegerField(default=500)
-
-    def __str__(self):
-        return self.name
-
-
 class Betting(models.Model):
     date = models.DateField()
     time = models.IntegerField()
     region = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.region + ' ' + self.date + ' ' + self.time
+        return self.region + ' ' + self.date.strftime("%Y-%m-%d") + ' ' + str(self.time)
 
     # https://docs.djangoproject.com/en/4.0/ref/models/constraints/#uniqueconstraint
     class Meta:
@@ -33,7 +23,7 @@ class Betting(models.Model):
 
 
 class Participate(models.Model):
-    user = models.ForeignKey(ServiceUser, on_delete=models.CASCADE, related_name="participates")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="participates")
     betting = models.ForeignKey(Betting, on_delete=models.CASCADE, related_name="participates")
     choice = models.BooleanField()
     point = models.IntegerField()
