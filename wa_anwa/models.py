@@ -39,3 +39,4 @@ class Result(models.Model):
     point = models.IntegerField()
     win = models.BooleanField()
     checked = models.BooleanField(default=False)
+

@@ -6,8 +6,6 @@ from models import User,Betting,Participate,Answer,Result
 def index(request):
     return render(request, 'wa_anwa/index.html')
 
-
-
 def ranking(request):
 
     #  유저 모델을 불러옴
@@ -105,8 +103,6 @@ def my_page(request):
     return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
 
 
-
-    
 
 def home(request):
     user = request.user
