@@ -3,9 +3,10 @@ from accounts.models import User
 
 # Create your models here.
 
+
 class Betting(models.Model):
-    date = models.DateField()
-    time = models.IntegerField()
+    date = models.CharField(max_length=11)
+    time = models.CharField(max_length=6)
     region = models.CharField(max_length=10)
 
     def __str__(self):
@@ -31,7 +32,7 @@ class Participate(models.Model):
 
 class Answer(models.Model):
     betting = models.OneToOneField(Betting, on_delete=models.CASCADE, related_name="answer")
-    answer = models.BooleanField()
+    answer = models.BooleanField() #True:와, False:안와
 
 
 class Result(models.Model):
@@ -39,3 +40,5 @@ class Result(models.Model):
     point = models.IntegerField()
     win = models.BooleanField()
     checked = models.BooleanField(default=False)
+
+

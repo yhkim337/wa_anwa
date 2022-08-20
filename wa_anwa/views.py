@@ -1,17 +1,32 @@
 from django.shortcuts import render
+from accounts.models import User
 import datetime
-from models import User,Betting,Participate,Answer,Result
+from wa_anwa.models import Betting,Participate,Answer,Result
+from django.http import JsonResponse
 
 # Create your views here.
+
+def time(request):
+    now = datetime.datetime.now()
+    today8am = now.replace(hour=8, minute=0, second=0, microsecond=0)
+    today6pm = now.replace(hour=18, minute=0, second=0, microsecond=0)
+    if now < today8am:
+        time=today8am
+        return JsonResponse({'hour': "오전 8시", 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today8am - datetime.timedelta(hours=4)})
+    elif now >= today8am and now < today6pm:
+        time=today6pm
+        return JsonResponse({'hour': "오후 6시", 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today6pm - datetime.timedelta(hours=4)})
+    else:
+        time = today8am + datetime.timedelta(days=1)
+        return JsonResponse({'hour': "오전 8시", 'day':time.day, 'month':time.month ,'year':time.year,'endtime':today8am + datetime.timedelta(hours=20)})
+
 def index(request):
     return render(request, 'wa_anwa/index.html')
-
-
 
 def ranking(request):
 
     #  유저 모델을 불러옴
-    users = ServiceUser.objects.all()
+    users = User.objects.all()
     # users.sort(key = lambda x:x[0])
     len_user = len(users)
 
@@ -24,7 +39,7 @@ def ranking(request):
     today = datetime.date.today()
     m = today.month
     bettings = Betting.objects.filter(date_year='2022', date_month = m)
-   
+
     # 사용자 별로 이번 달의 배팅 안에서 연결된 Participate 불러오기 
     for k in range(len_user):
         temp_user = users[k]
@@ -73,7 +88,7 @@ def ranking(request):
 def my_page(request):
     # 유저 객체를 불어와서 전달
     now_user = request.user
-    my_user = ServiceUser.objects.get(pk = now_user.pk)
+    my_user = User.objects.get(pk = now_user.pk)
 
     # 이번 달에 진행한 배팅을 모두 불러온다.
     today = datetime.date.today()
@@ -105,13 +120,24 @@ def my_page(request):
     return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
 
 
+def betting(request):
+    return render(request, 'wa_anwa/betting.html')
 
-    
-
-def home(request):
+def map(request):
     user = request.user
     if user.is_authenticated:
-         return render(request, 'wa_anwa/home.html')
+        participate = Participate.objects.filter(user = user).last()
+        lastResult = Result.objects.filter(participation=participate)
+        
+        # if lastResult.checked:
+        if lastResult != False:
+            return render(request, 'wa_anwa/map.html', {'user_point':user.point})
+        else: 
+            lastResult.checked = True
+            return render(request, 'wa_anwa/result.html')
     else:
         return render(request, 'wa_anwa/index.html')
 
+def createparticipate(request):
+    Participate.objects.create(region=request.POST['region'], time=request.POST['time'], date=request.POST['date'])
+    return
