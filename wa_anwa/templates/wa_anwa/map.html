@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 {% load static %}
-
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'wa_anwa/css/map.css' %}"/>
+{% endblock style %}
     <div style='background: skyblue'>
         <p>배팅 남은 시간</p>
         8월 20일 오후 11시까지 <div id="HourCountdown"></div>
