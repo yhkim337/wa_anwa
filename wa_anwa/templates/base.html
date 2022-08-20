@@ -3,24 +3,24 @@
   <head>
     <meta charset="utf-8" />
     <title>wa_anwa</title>
-    {% load static %} 
-    <!-- {% load sass_tags %} {% load socialaccount %}
-    {%providers_media_js%} -->
-    <link
-      rel="stylesheet"
-      type="text/css"
-      href="{% sass_src 'wa_anwa/css/base.css' %}"
-    />
-    {% block style %} 
+    {% load static %}
+    {% load sass_tags %} {% load socialaccount %}
+    {%providers_media_js%}
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'wa_anwa/css/base.css' %}"/>
+    {% block style %}
+    <link rel="stylesheet" type="text/css" href="{% sass_src 'wa_anwa/css/map.css' %}"/>
     {% endblock style %}
     <script type="module" src="{% static 'wa_anwa/js/base.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-    {% block js %} 
+    {% block js %}
+    <script src="{% static 'wa_anwa/js/time.js' %}"></script>
     {% endblock js %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="{% static 'wa_anwa/js/base2.js' %}"></script>
     <script src="{% static 'wa_anwa/js/time.js' %}"></script>
   </head>
+  <body>
   {% block content %}
   {% endblock %}
+  </body>
 </html>
