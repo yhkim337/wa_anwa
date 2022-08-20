@@ -1,9 +1,8 @@
 from django.shortcuts import render
 import datetime
-from models import ServiceUser,Betting,Participate,Answer,Result
+from models import User,Betting,Participate,Answer,Result
 
 # Create your views here.
-
 def index(request):
     return render(request, 'wa_anwa/index.html')
 
@@ -105,11 +104,10 @@ def my_page(request):
 
 
 
-
 def home(request):
     user = request.user
     if user.is_authenticated:
          return render(request, 'wa_anwa/home.html')
     else:
         return render(request, 'wa_anwa/index.html')
-   
+
