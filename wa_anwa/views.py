@@ -1,6 +1,7 @@
 from django.shortcuts import render
 import datetime
-from models import ServiceUser,Betting,Participate,Answer,Result
+from models import Betting,Participate,Answer,Result
+from accounts.models import User
 
 # Create your views here.
 
@@ -10,13 +11,12 @@ def index(request):
 def ranking(request):
 
     #  유저 모델을 불러옴
-    users = ServiceUser.objects.all()
-    # users.sort(key = lambda x:x[0])
+    users = User.objects.all()
     len_user = len(users)
 
     # 유저 별 달의 포인트와 적중률을 담을 배열 생성
-    all_Participate = [0]**len_user
-    all_HitRate = [[0]**len_user for _ in range(2)]
+    all_Participate = [0]*len_user
+    all_HitRate = [[0]*len_user for _ in range(2)]
 
 
     # 이번 달에 진행한 배팅을 모두 불러온다.
@@ -72,7 +72,7 @@ def ranking(request):
 def my_page(request):
     # 유저 객체를 불어와서 전달
     now_user = request.user
-    my_user = ServiceUser.objects.get(pk = now_user.pk)
+    my_user = User.objects.get(pk = now_user.pk)
 
     # 이번 달에 진행한 배팅을 모두 불러온다.
     today = datetime.date.today()
@@ -81,7 +81,11 @@ def my_page(request):
 
     # 이번 달 진행한 배팅을 불러와 적중률 계산하고 달력 표시용 데이터 수집
     hitRate = []
-    calender = [0]*31
+    calender = [[0]*31 for _ in range(2)]
+
+    for i in range(31):
+        calender[1][i] = i
+
 
     for i in range(len(bettings)):
             user_betting = bettings[i]
@@ -94,12 +98,17 @@ def my_page(request):
                 # 적중률 계산을 위해서 성공 실패 횟수를 저장
                 if result.win == True:
                     hitRate[0] += 1
-                    calender[day] = True
+                    calender[0][day] = True
 
                 elif result.win == False:
                     hitRate[1] += 1
-                    calender[day] = False
+                    calender[0][day] = False
     user_hitRate = hitRate[0]//hitRate[0] + hitRate[1]
+
+
+    # 달력 로직
+
+    
 
     return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
 

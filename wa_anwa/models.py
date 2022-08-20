@@ -1,5 +1,6 @@
 from django.db import models
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
+from accounts.models import User
 
 # Create your models here.
 
@@ -48,4 +49,6 @@ class Result(models.Model):
     participation = models.OneToOneField(Participate, on_delete=models.CASCADE, related_name="result")
     point = models.IntegerField()
     win = models.BooleanField()
-    check = models.BooleanField()
+    checked = models.BooleanField()
+
+

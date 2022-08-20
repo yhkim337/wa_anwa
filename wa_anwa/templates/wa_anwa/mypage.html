@@ -15,6 +15,18 @@
                 <p>와안와율{{user_hitRate}}%</p>
             </div>
         </div>
+        <div class="calenderTitle">
+            <p>{{month}}월 와안와 달력</p>
+            <div class="calender">
+                {% for day in calender %}
+                {%  if day[0] == True %}
+                <div class = "day">{{day[1]}}일 <img src="" alt="동그라미 이미지" srcset=""></div>
+                {% else %}
+                <div class = "day">{{day[1]}}일 <img src="" alt="가로 이미지" srcset=""></div>
+                {% endif %}
+                {% endfor %}
+            </div>
+        </div>
 
     </div>
 </div>
