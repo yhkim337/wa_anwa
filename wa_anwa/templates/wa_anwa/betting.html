@@ -1,10 +1,8 @@
-{% extends 'wa_anwa/base.html' %}
+{% extends "base.html" %}
 {% block content %}
-  <script type="text/javascript" src="time.js"></script>
-  <p>와안와?</p>
-  <p>8월 20일 오후 11시까지</p> <div id="HourCountdown"></div> <br>
-</head>
-<body>
+{% load static %}
+<p>와안와?</p>
+8월 20일 오후 11시까지 <div id="HourCountdown"></div> <br>
 <div>.</div>
 <div>중구</div>
 <div>오늘 9시</div>
@@ -19,5 +17,4 @@
 <div>실시간 투표 상황</div><br>
 <div>내 포인트</div><br>
 <a href="SEOUL_SIG.html">닫기</a>
-</body>
 {% endblock content %}

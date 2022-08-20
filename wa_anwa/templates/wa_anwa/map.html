@@ -1,16 +1,6 @@
-{% extends 'wa_anwa/base.html' %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="map.css">
-    <script type="text/javascript" src="time.js"></script>
-</head>
-<body>
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
     <div style='background: skyblue'>
         <p>배팅 남은 시간</p>
         8월 20일 오후 11시까지 <div id="HourCountdown"></div>
@@ -60,7 +50,7 @@
         <path id="CD11710" class="OUTLINE" d="M 621 374 l 6 2 4 2 4 4 0 8 -2 5 -1 3 0 7 5 2 8 5 5 3 8 4 3 2 5 3 5 2 -4 3 0 6 -3 10 4 5 5 3 10 0 9 3 5 5 -1 4 -2 7 -3 9 -4 3 -5 4 -5 5 -2 6 -3 7 -5 5 -10 0 -6 0 0 8 -4 5 -6 -2 -2 -1 -1 4 -4 -5 -3 -4 -5 -10 -2 -2 -4 -7 -3 -5 -3 -5 -3 -6 -5 -5 -5 -4 -6 -3 -5 -3 -5 -2 -12 -4 -3 -2 -6 -2 -7 -1 -6 -2 -1 -10 -1 -6 -1 -13 0 -4 0 -10 6 2 5 1 5 1 5 -1 6 -3 8 -5 3 -2 3 -3 11 -12 5 -4 5 -5 4 -5 z " />
         <path id="CD11740" class="OUTLINE" d="M 726 320 l 1 7 3 9 0 9 1 9 1 10 1 5 -1 -1 -5 -1 -3 0 -4 2 -11 0 -8 1 -5 6 -4 5 -4 6 -2 4 -1 8 -4 7 -3 2 1 1 -1 2 -6 7 -1 8 -5 -2 -5 -3 -3 -2 -8 -4 -5 -3 -8 -5 -5 -2 0 -7 1 -3 2 -5 0 -8 -4 -4 -4 -2 -6 -2 -7 0 2 -4 2 -5 2 -10 4 -10 1 -1 4 -6 7 -6 5 -3 6 -3 8 -3 4 -1 5 0 11 0 9 -4 7 -5 8 -6 11 -6 11 0 0 7 3 6 z " />
         </g><g filter="url(#dropshadow2)"></g><g filter="url(#dropshadow2)"><text id="LCD11110" class="TEXT" x="399" y="277">종로구</text>
-        <text id="LCD11140" class="TEXT" x="433" y="338"><a href="1140.html">중구</a></text>
+        <text id="LCD11140" class="TEXT" x="433" y="338"><a href="">중구</a></text>
         <text id="LCD11170" class="TEXT" x="407" y="395">용산구</text>
         <text id="LCD11200" class="TEXT" x="505" y="356">성동구</text>
         <text id="LCD11215" class="TEXT" x="577" y="365">광진구</text>
@@ -86,5 +76,5 @@
         <text id="LCD11740" class="TEXT" x="675" y="358">강동구</text>
         </g>
     </svg>
-</body>
-</html>
+
+{% endblock content %}
