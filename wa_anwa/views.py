@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from accounts.models import User
 import datetime
-from models import Betting,Participate,Answer,Result
+from wa_anwa.models import Betting,Participate,Answer,Result
 
 # Create your views here.
 def index(request):
@@ -23,7 +23,7 @@ def ranking(request):
     today = datetime.date.today()
     m = today.month
     bettings = Betting.objects.filter(date_year='2022', date_month = m)
-   
+
     # 사용자 별로 이번 달의 배팅 안에서 연결된 Participate 불러오기 
     for k in range(len_user):
         temp_user = users[k]
@@ -104,11 +104,15 @@ def my_page(request):
     return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
 
 
-
 def home(request):
     user = request.user
     if user.is_authenticated:
-         return render(request, 'wa_anwa/home.html')
+        return render(request, 'wa_anwa/home.html')
     else:
         return render(request, 'wa_anwa/index.html')
 
+def map(request):
+    return render(request, 'wa_anwa/map.html')
+
+def betting(request):
+    return render(request, 'wa_anwa/betting.html')
