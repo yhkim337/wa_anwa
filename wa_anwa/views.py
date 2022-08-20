@@ -1,6 +1,6 @@
 from django.shortcuts import render
 import datetime
-
+from models import ServiceUser,Betting,Participate,Answer,Result
 
 # Create your views here.
 
@@ -24,17 +24,17 @@ def ranking(request):
     # 이번 달에 진행한 배팅을 모두 불러온다.
     today = datetime.date.today()
     m = today.month
-    bettings = Bettings.objects.filter(date_year='2022', date_month = m)
+    bettings = Betting.objects.filter(date_year='2022', date_month = m)
    
     # 사용자 별로 이번 달의 배팅 안에서 연결된 Participate 불러오기 
     for k in range(len_user):
         temp_user = users[k]
         for i in range(len(bettings)):
-            betting = bettings[i]
-            participates = Participate.objects.filter(betting.id == b_id)
+            user_betting = bettings[i]
+            participates = Participate.objects.filter(betting = user_betting)
             for j in range(len(participates)):
                 participate = participates[j]
-                result = Result.filter(participate.id == participation)
+                result = Result.filter(participation = participate)
                 all_Participate[temp_user.pk] += result.point
 
                 # 적중률 계산을 위해서 성공 실패 횟수를 저장
@@ -74,33 +74,33 @@ def ranking(request):
 def my_page(request):
     # 유저 객체를 불어와서 전달
     now_user = request.user
-    my_user = ServiceUser.objects.get(pk == now_user.pk)
+    my_user = ServiceUser.objects.get(pk = now_user.pk)
 
     # 이번 달에 진행한 배팅을 모두 불러온다.
     today = datetime.date.today()
     m = today.month
-    bettings = Bettings.objects.filter(date_year='2022', date_month = m)
+    bettings = Betting.objects.filter(date_year='2022', date_month = m)
 
     # 이번 달 진행한 배팅을 불러와 적중률 계산하고 달력 표시용 데이터 수집
     hitRate = []
     calender = [0]*31
 
     for i in range(len(bettings)):
-            betting = bettings[i]
-            day= betting.date.day()
-            participates = Participate.objects.filter(betting.id == b_id)
+            user_betting = bettings[i]
+            day= user_betting.date.day()
+            participates = Participate.objects.filter(betting = user_betting)
             for j in range(len(participates)):
                 participate = participates[j]
-                result = Result.filter(participate.id == participation)
+                result = Result.filter(participation = participate)
                 
                 # 적중률 계산을 위해서 성공 실패 횟수를 저장
                 if result.win == True:
                     hitRate[0] += 1
-                    month[day] = True
+                    calender[day] = True
 
                 elif result.win == False:
                     hitRate[1] += 1
-                    month[day] = False
+                    calender[day] = False
     user_hitRate = hitRate[0]//hitRate[0] + hitRate[1]
 
     return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
