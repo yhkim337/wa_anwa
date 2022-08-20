@@ -8,5 +8,5 @@ urlpatterns = [
     path('betting/<int:id>', views.betting, name='betting'),
     path('', views.map, name='map'),
     path('time/', views.time, name='time'),
-    
+    path('createparticipate/', views.createparticipate, name="createparticipate"),
 ]

@@ -7,18 +7,63 @@
     {% load sass_tags %} {% load socialaccount %}
     {%providers_media_js%}
     <link rel="stylesheet" type="text/css" href="{% sass_src 'wa_anwa/css/base.css' %}"/>
+
     {% block style %}
     {% endblock style %}
+
     <script type="module" src="{% static 'wa_anwa/js/base.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
     {% block js %}
     <script src="{% static 'wa_anwa/js/time.js' %}"></script>
     {% endblock js %}
+
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="{% static 'wa_anwa/js/base2.js' %}"></script>
+    <script src="{% static 'wa_anwa/js/time.js' %}"></script>
   </head>
   <body>
-  {% block content %}
-  {% endblock %}
+    <!-- 전체 화면 -->
+    <div class="whole_display"> 
+      <!-- 위쪽 : 로고 있는 쪽 -->
+      <div class="top">
+          <img class="logo_img" src="{% static 'wa_anwa/img/base_imgs/로고.png' %}">
+      </div>
+      <!-- 중간 : 내용 들어갈 곳 -->
+      <div class="middle">
+          <img class="cloud" id="cloud_1" src="{% static 'wa_anwa/img/base_imgs/구름.png' %}">
+          <img class="cloud" id="cloud_2" src="{% static 'wa_anwa/img/base_imgs/구름.png' %}">
+          {% block content %}
+          {% endblock %}
+      </div>
+      <!-- 아래 : 탭 들어갈 곳 -->
+      <div class="bottom">
+        <div class="tab_left">
+            <div class="time_left">
+                <img class="icon_timebomb" src="{% static 'wa_anwa/img/base_imgs/아이콘_폭탄.png' %}">
+                <p class="time_left_ms">3h 43s</p>
+            </div>
+            <div class="umb_point" style="width:60px">
+                <img class="icon_umb_point" src="{% static 'wa_anwa/img/base_imgs/우산.png' %}">
+                <p class="umb_point_umb">+100</p>
+            </div>
+        </div>
+        <div class="tab_right">
+            <div class="betting_btn">
+                <!-- 배팅 페이지 연결하기 -->
+                <a href=""><img class="betting" src="{% static 'wa_anwa/img/base_imgs/아이콘_배팅.png' %}"></a>
+            </div>
+            <div class="ranking_btn">
+                <!-- 랭킹 페이지 연결하기 -->
+                <a href=""><img class="ranking" src="{% static 'wa_anwa/img/base_imgs/아이콘_랭킹.png' %}"></a>
+            </div>
+            <div class="mypage_btn">
+                <!-- 마이페이지 연결하기 -->
+                <a href=""><img class="mypage" src="{% static 'wa_anwa/img/base_imgs/아이콘_마이.png' %}"></a>
+            </div>   
+        </div>
+      </div>
+    </div>
   </body>
 </html>
