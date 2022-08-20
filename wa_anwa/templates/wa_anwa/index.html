@@ -1,0 +1,31 @@
+{% extends 'wa_anwa/base.html' %}
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <title>wa_anwa</title>
+    {% load static %} 
+    {% load sass_tags %} 
+    {% load socialaccount %}
+    {% providers_media_js %}
+    {% block style %}
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{% sass_src 'wa_anwa/scss/index.css' %}"
+    />
+    {% endblock style %}
+  </head>
+  {% block content %}
+  <body>
+    <div class="body-container">
+      <div id="kakao-login-button">
+        <a href="{% url 'kakao-login' %}">
+          <img id="kakao-button" src="{% static 'wa_anwa/img/kakao_login_btn.png' %}"/>
+        </a>
+      </div>
+    </div>
+  </body>
+  {% endblock content %}
+</html>
