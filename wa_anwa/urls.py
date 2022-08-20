@@ -8,4 +8,5 @@ urlpatterns = [
     path('betting/', views.betting, name='betting'),
     path('', views.map, name='map'),
     path('time/', views.time, name='time'),
+    path('createparticipate/', views.createparticipate, name="createparticipate"),
 ]
