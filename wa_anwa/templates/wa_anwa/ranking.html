@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class = "container">
+    <div class="rankingPage">랭킹페이지</div>
+    <div class = "rankingModal">
+        <div class = "modalTitle">
+            <p>{{month}}월 와안와 랭킹</p>
+        </div>
+        <div class = "rankingSubtitle">
+            <p>이번 달 얻은 우산 기준입니다</p>
+        </div>
+        <div class = "rankingButton">
+            <button>best</button>
+            <button>worst</button>
+        </div> 
+        <div class="rankingLists">
+            <ol>
+            {% for user in ranking %}
+            <div class="rankingList">
+                <p class = "rankNumber">number</p>
+                <img class="rankImg"  src="" alt="">
+                <div class = "rankmiddle">
+                    <div class = "rankName">
+                        <p>{{user[2].name}}</p>
+                    </div>
+                    <div class = "hitRate">
+                        <p>(와안와율:{{user[1]}})</p>
+                    </div>
+                </div>
+                <div class = " rankPoint">
+                    <p>{{user[0]}}</p>
+                </div>
+                <img src="" alt="우산 이미지 링크">
+            </div>
+            {% endfor %}
+            </ol>
+        </div>
+        <div class="myRanking">
+            <div class="myRankingTitle">
+                <p>나의 랭킹</p>
+            </div>
+            <div class="myRankingBody">
+                <div class = "myRankingNum">
+                    {{user_ranking[0]}}
+                </div>
+                <img class="rankImg"  src="" alt="">
+                <div class = "rankmiddle">
+                    <div class = "rankName">
+                        <p>{{user_ranking[1][2].name}}</p>
+                    </div>
+                    <div class = "hitRate">
+                        <p>(와안와율:{{user_ranking[1][1]}})</p>
+                    </div>
+                </div>
+                <div class = " rankPoint">
+                    <p>{{user_ranking[1][0]}}</p>
+                </div>
+                <img src="" alt="우산 이미지 링크">
+            </div>
+        </div>
+    </div>
+    
+
+</div>
+
+{% endblock content %}
