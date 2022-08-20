@@ -8,6 +8,7 @@ def index(request):
     return render(request, 'wa_anwa/index.html')
 
 
+
 def ranking(request):
 
     #  유저 모델을 불러옴
@@ -112,3 +113,11 @@ def my_page(request):
 
 
 
+
+def home(request):
+    user = request.user
+    if user.is_authenticated:
+         return render(request, 'wa_anwa/home.html')
+    else:
+        return render(request, 'wa_anwa/index.html')
+   

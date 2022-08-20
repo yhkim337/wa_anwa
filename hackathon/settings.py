@@ -12,10 +12,19 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
+import environ
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+
+MEDIA_URL = '/img/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
+
+env = environ.Env()
+environ.Env.read_env(
+    env_file=os.path.join(BASE_DIR, '.env')
+)
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -38,7 +47,17 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'wa_anwa.apps.WaAnwaConfig',
+    'wa_anwa',
+    'accounts.apps.AccountsConfig',
+    'sass_processor',
+
+    #allauth
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+
+    #provider
+    'allauth.socialaccount.providers.kakao',
 ]
 
 MIDDLEWARE = [
@@ -126,3 +145,29 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 SASS_PROCESSOR_ENABLED =  True
 SASS_PROCESSOR_ROOT =  os.path.join(BASE_DIR, 'wa_anwa', 'static')
+
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+)
+
+LOGIN_REDIRECT_URL = "/wa_anwa/"
+LOGOUT_REDIRECT_URL = "/wa_anwa/"
+
+SITE_ID = 1
+
+ACCOUNT_LOGOUT_ON_GET = True
+
+# 소셜 로그인 버튼 눌렀을 때 확인 페이지 스킵
+SOCIALACCOUNT_LOGIN_ON_GET = False
+
+
+# request status 상태값 variables 여기에 정의하기
+
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR, 'accounts', 'static')
+] #static 파일들이 어디에 있는지를 쓰는곳
+
+AUTH_USER_MODEL = 'accounts.User'
+
+LOGOUT_REDIRECT_URL = '/wa_anwa/index.html'
