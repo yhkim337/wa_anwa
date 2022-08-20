@@ -40,7 +40,7 @@ def kakao_callback(request):
             user = user_queryset.first()
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             django_login(request, user)
-            return redirect('wa_anwa:home') #나중에 template 이름보고 수정
+            return redirect('wa_anwa:betting') #나중에 template 이름보고 수정
         else:
             user = User(
                 username=user_info['properties']['nickname'],
@@ -50,7 +50,7 @@ def kakao_callback(request):
             user.save()
             user.backend = 'django.contrib.auth.backends.ModelBackend'
             django_login(request, user)
-            return redirect('wa_anwa:home') #나중에 template 이름보고 수정
+            return redirect('wa_anwa:betting') #나중에 template 이름보고 수정
 
 def logout(request):
     django_logout(request)
