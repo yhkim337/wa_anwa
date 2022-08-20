@@ -21,12 +21,9 @@ import accounts.views
 from django.conf import settings
 from django.conf.urls.static import static
 
-from django.conf import settings
-from django.conf.urls.static import static
-
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', wa_anwa.views.index, name='index'),
+    path('index/', wa_anwa.views.index, name='index'),
     path('posts/', include('wa_anwa.urls')),
     path('', wa_anwa.views.home, name='home'),
     path('wa_anwa/', include('wa_anwa.urls', namespace="wa_anwa")), 
