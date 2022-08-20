@@ -4,7 +4,6 @@ from accounts.models import User
 # Create your models here.
 
 
-
 class Betting(models.Model):
     date = models.DateField()
     time = models.IntegerField()
