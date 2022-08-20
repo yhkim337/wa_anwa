@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        const key = "ALgusVmrIKpNg9QD2h6tcFlDtN3lxtPwO15rB/wxF4ekCy6KVSUdR98lYEpWqVKsr1v39FK0Kll5YEy1wzKESw==";
+
+        // 현재 날짜, 시각을 YYYYMMDD, HH, MM 형태로 반환하는 함수
+        const getNowDateTime = () => {
+            const d = new Date();
+            const koreaDate = new Date(d.getTime() - (d.getTimezoneOffset() * 60000));
+            const YMD = koreaDate.toISOString().split('T')[0].replaceAll('-', '');
+            const HM = koreaDate.toISOString().split('T')[1].slice(0, 5).split(':');
+
+            return {'date': YMD, 'time': {'hour': HM[0], 'min': HM[1]}}
+        }
+
+
+
+        // 현재 시각을 기준으로 6시간 이내의 예보를 반환하는 함수 (초단기 예보)
+        const sixFcstList = ({nowDateTime, region}) => {
+            const date = nowDateTime.date;
+            const H = nowDateTime.time.hour;
+            const M = nowDateTime.time.min;
+            
+            
+            let baseTime = H + M;
+            if (int(M) < 30){
+                baseTime = (int(H) - 1).toString() + M;
+            }
+            
+            
+            const param_option = {
+                SKY : { // 하늘상태 조회를 위한 param
+                    ServiceKey: key,
+                    pageNo: 4,
+                    numOfRows: 6,
+                    dataType: "JSON",
+                    base_date: base,
+                    base_time: baseTime,
+                    nx: region.x, ny: region.y
+                },
+                PTY : { // 강수상태 조회를 위한 param
+                    ServiceKey: key,
+                    pageNo: 4,
+                    numOfRows: 6,
+                    dataType: "JSON",
+                    base_date: base,
+                    base_time: baseTime,
+                    nx: region.x, ny: region.y
+                }
+            }
+        }
+
+        // 
+        
+
+        // setInterval : 10분 간격으로 초단기예보 업데이트
+
+        const sky_option = {
+                ServiceKey: key,
+                pageNo: 4,
+                numOfRows: 6,
+                dataType: "JSON",
+                base_date: "20220819",
+                base_time: "2000",
+                nx: 61, ny: 127
+            }
+
+        
+        axios
+          .all([axios.get()])
+        .get('http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst',{
+            params: option
+        })
+        .then(({data})=>{
+            sky_fcst_list = data.response.body.items.item;
+        
+            sky_fcst_list.map((item)=>{
+                console.log(item);
+            })
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+
+        option.pageNo = 2;
+        
+    </script>
+</body>
+</html>

@@ -32,7 +32,7 @@ class Betting(models.Model):
 
 
 class Participate(models.Model):
-    user = models.ForeignKey(ServiceUser, on_delete=models.CASCADE, related_name="participates")
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="participates")
     betting = models.ForeignKey(Betting, on_delete=models.CASCADE, related_name="participates")
     choice = models.BooleanField()
     point = models.IntegerField()
@@ -48,6 +48,4 @@ class Result(models.Model):
     participation = models.OneToOneField(Participate, on_delete=models.CASCADE, related_name="result")
     point = models.IntegerField()
     win = models.BooleanField()
-    check = models.BooleanField()
-
-
+    checked = models.BooleanField()
