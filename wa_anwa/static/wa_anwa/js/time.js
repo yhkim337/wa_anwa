@@ -1,4 +1,9 @@
-CountDownTimer('8/20/2022 11:00 PM', 'HourCountdown');
+
+
+(async ()=> {
+    const response = await axios.get('wa_anwa/time');
+    CountDownTimer(response.data.endtime, 'HourCountdown');
+})();
 
 function CountDownTimer(dt, id) {
     var end = new Date(dt);
@@ -14,7 +19,7 @@ function CountDownTimer(dt, id) {
       // 시간 종료 시 뜨는 문구
         if (distance < 0) {
             clearInterval(timer);
-            document.getElementById(id).innerHTML = '카운트다운이 끝났습니다. 곧 결과를 공개합니다!';
+            document.getElementById("timelimit").innerHTML = '카운트다운이 끝났습니다. 곧 결과를 공개합니다!';
             return;
         }
     var days = Math.floor(distance / _day);

@@ -1,11 +1,27 @@
 from django.shortcuts import render
-import datetime
+from accounts.models import User
 from datetime import date
 from wa_anwa.models import Betting,Participate,Answer,Result
 from accounts.models import User
 import calendar as cd
+from django.http import JsonResponse
+import datetime
 
 # Create your views here.
+
+def time(request):
+    now = datetime.datetime.now()
+    today8am = now.replace(hour=8, minute=0, second=0, microsecond=0)
+    today6pm = now.replace(hour=18, minute=0, second=0, microsecond=0)
+    if now < today8am:
+        time=today8am
+        return JsonResponse({'hour': "오전 8시", 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today8am - datetime.timedelta(hours=4)})
+    elif now >= today8am and now < today6pm:
+        time=today6pm
+        return JsonResponse({'hour': "오후 6시", 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today6pm - datetime.timedelta(hours=4)})
+    else:
+        time = today8am + datetime.timedelta(days=1)
+        return JsonResponse({'hour': "오전 8시", 'day':time.day, 'month':time.month ,'year':time.year,'endtime':today8am + datetime.timedelta(hours=20)})
 
 def index(request):
     return render(request, 'wa_anwa/index.html')
@@ -25,10 +41,10 @@ def ranking(request):
     today = datetime.date.today()
     year = today.year
     m = today.month
+
     bettings = Betting.objects.filter(date__year= str(year),
                       date__month=str(m))
     
-   
     # 사용자 별로 이번 달의 배팅 안에서 연결된 Participate 불러오기 
 
 
@@ -173,12 +189,24 @@ def mypage(request):
     return render( request, 'wa_anwa/mypage.html', {'monthcal':monthcal,'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
 
 
+def betting(request):
+    return render(request, 'wa_anwa/betting.html')
 
-
-def home(request):
+def map(request):
     user = request.user
     if user.is_authenticated:
-         return render(request, 'wa_anwa/home.html')
+        participate = Participate.objects.filter(user = user).last()
+        lastResult = Result.objects.filter(participation=participate)
+        
+        # if lastResult.checked:
+        if lastResult != False:
+            return render(request, 'wa_anwa/map.html', {'user_point':user.point})
+        else: 
+            lastResult.checked = True
+            return render(request, 'wa_anwa/result.html')
     else:
         return render(request, 'wa_anwa/index.html')
-   
+
+def createparticipate(request):
+    Participate.objects.create(region=request.POST['region'], time=request.POST['time'], date=request.POST['date'])
+    return
