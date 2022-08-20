@@ -7,16 +7,19 @@ from django.http import JsonResponse
 
 # Create your views here.
 
-def time():
+def time(request):
     now = datetime.datetime.now()
     today8am = now.replace(hour=8, minute=0, second=0, microsecond=0)
     today6pm = now.replace(hour=18, minute=0, second=0, microsecond=0)
     if now < today8am:
-        return JsonResponse({'time':today8am})
+        time=today8am
+        return JsonResponse({'hour': "오전 8시", 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today8am - datetime.timedelta(hours=4)})
     elif now >= today8am and now < today6pm:
-        return JsonResponse({'time':today6pm})
+        time=today6pm
+        return JsonResponse({'hour': "오후 6시", 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today6pm - datetime.timedelta(hours=4)})
     else:
-        return JsonResponse({'time':today8am + datetime.timedelta(days=1)})
+        time = today8am + datetime.timedelta(days=1)
+        return JsonResponse({'hour': "오전 8시", 'day':time.day, 'month':time.month ,'year':time.year,'endtime':today8am + datetime.timedelta(hours=20)})
 
 def index(request):
     return render(request, 'wa_anwa/index.html')
@@ -124,10 +127,16 @@ def map(request):
     if user.is_authenticated:
         participate = Participate.objects.filter(user = user).last()
         lastResult = Result.objects.filter(participation=participate)
-        if lastResult.checked:
-            return render(request, 'wa_anwa/map.html')
+        
+        # if lastResult.checked:
+        if lastResult != False:
+            return render(request, 'wa_anwa/map.html', {'user_point':user.point})
         else: 
             lastResult.checked = True
             return render(request, 'wa_anwa/result.html')
     else:
         return render(request, 'wa_anwa/index.html')
+
+def createparticipate(request):
+    Participate.objects.create(region=request.POST['region'], time=request.POST['time'], date=request.POST['date'])
+    return
