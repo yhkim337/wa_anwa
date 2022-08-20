@@ -1,0 +1,36 @@
+.body-container{
+    position: relative;
+    width: 390px;
+    height: 844px;
+    overflow:hidden;
+    background: linear-gradient(12.05deg, rgba(0, 0, 0, 0) 7.29%, rgba(255, 255, 255, 0.29) 66.67%, #FFFFFF 100%), linear-gradient(12.05deg, rgba(255, 255, 255, 0) 0.01%, rgba(191, 191, 191, 2.5775e-08) 0.02%, #4BA3FF 11.98%);
+}
+
+/* 와안와 로고 */
+.index_logo{
+    position: absolute;
+    width: 230px;
+    height: 205px;
+    left: 86px;
+    top: 272px;
+}
+
+/* 우산 그림 */
+.index_umb{
+    position: absolute;
+    width: 906px;
+    height: 800px;
+    left: -280px;
+    top: -150px;
+    background: url(toppng.png);
+}
+
+/* 로그인 버튼 */
+#kakao-login-button{
+    position: absolute;
+    width: 300px;
+    height: 45px;
+    left: 45px;
+    top: 719px;
+    background: url(kakao_login_medium_wide.png);
+}
