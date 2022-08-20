@@ -38,7 +38,4 @@ class Result(models.Model):
     participation = models.OneToOneField(Participate, on_delete=models.CASCADE, related_name="result")
     point = models.IntegerField()
     win = models.BooleanField()
-    checked = models.BooleanField(default=False)
-
-
-
+    check = models.BooleanField()
