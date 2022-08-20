@@ -17,6 +17,9 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import include
 import wa_anwa.views
+import accounts.views
+from django.conf import settings
+from django.conf.urls.static import static
 
 from django.conf import settings
 from django.conf.urls.static import static
@@ -25,6 +28,12 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', wa_anwa.views.index, name='index'),
     path('posts/', include('wa_anwa.urls')),
-]
-
+    path('', wa_anwa.views.home, name='home'),
+    path('wa_anwa/', include('wa_anwa.urls', namespace="wa_anwa")), 
+    path('accounts/', include('accounts.urls', namespace="accounts")),
+    path('accounts/kakao-login/', accounts.views.kakao_login, name='kakao-login'),
+    path('accounts/signin/kakao/callback/', accounts.views.kakao_callback, name='kakao-callback'),
+    path('social_accounts/', include('allauth.urls')),
+    
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
