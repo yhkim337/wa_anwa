@@ -24,7 +24,6 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', wa_anwa.views.index, name='index'),
-    path('posts/', include('wa_anwa.urls')),
     path('', wa_anwa.views.home, name='home'),
     path('wa_anwa/', include('wa_anwa.urls', namespace="wa_anwa")), 
     path('accounts/', include('accounts.urls', namespace="accounts")),
