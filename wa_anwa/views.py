@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from accounts.models import User
 import datetime
-from models import Betting,Participate,Answer,Result
+from wa_anwa.models import Betting,Participate,Answer,Result
 
 # Create your views here.
 def index(request):
