@@ -1,4 +1,10 @@
-CountDownTimer('8/20/2022 11:00 PM', 'HourCountdown');
+
+
+(async ()=> {
+    const response = await axios.get('/wa_anwa/time');
+    console.log(response);
+    CountDownTimer(response.time, 'HourCountdown');
+})
 
 function CountDownTimer(dt, id) {
     var end = new Date(dt);

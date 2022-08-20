@@ -1,14 +1,8 @@
 {% extends 'wa_anwa/base.html' %}
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% block content %}
   <script type="text/javascript" src="time.js"></script>
   <p>와안와?</p>
-  8월 20일 오후 11시까지 <div id="HourCountdown"></div> <br>
+  <p>8월 20일 오후 11시까지</p> <div id="HourCountdown"></div> <br>
 </head>
 <body>
 <div>.</div>
@@ -26,3 +20,4 @@
 <div>내 포인트</div><br>
 <a href="SEOUL_SIG.html">닫기</a>
 </body>
+{% endblock content %}
