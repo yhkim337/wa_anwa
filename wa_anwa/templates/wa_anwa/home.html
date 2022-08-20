@@ -6,24 +6,21 @@
     <meta charset='utf-8'>
     <title>wa_anwa</title>
     {% load static %} 
-    <!-- {% load sass_tags %} 
+    {% load sass_tags %} 
     {% load socialaccount %}
-    {% providers_media_js %} -->
+    {% providers_media_js %}
     {% block style %}
     <link
       rel="stylesheet"
       type="text/css"
-      href="{% sass_src 'wa_anwa/css/index.css' %}"
+      href="{% sass_src 'wa_anwa/css/home.css' %}"
     />
     {% endblock style %}
   </head>
   {% block content %}
   <body>
     <div class="body-container">
-      <div id="kakao-login-button">
-        <a href="{% url 'kakao-login' %}">
-          <img id="kakao-button" src="{% static 'wa_anwa/img/kakao_login_btn.png' %}"/>
-        </a>
+      <h1>HOME</h1>
       </div>
     </div>
   </body>
