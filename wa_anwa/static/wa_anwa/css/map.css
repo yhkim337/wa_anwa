@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'waanwafont';
+  src: url("./font/waanwafont.woff") format('woff');
+}
+
 .OUTLINE {
   stroke-linejoin:round;
   stroke: black;
@@ -94,4 +99,53 @@
   font-size: 16px;
   text-anchor: middle;
   /* alignment-baseline: middle; */
+}
+
+#map-background {
+  position: absolute;
+  width: 362px;
+  height: 522px;
+  left: 14px;
+  top: 171px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 40px;
+}
+
+#question {
+  position: absolute;
+  width: 300px;
+  height: 157px;
+  left: 26px;
+  top: 40px;
+  font-family: 'waanwafont';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 46px;
+  text-align: center;
+  color: #000000;
+}
+
+#selectprovince_logo {
+  position: absolute;
+  width: 80px;
+  height: 64.38px;
+  left: 30px;
+  top: 400px;
+}
+
+#selectprovince {
+  position: absolute;
+  width: 271px;
+  height: 51px;
+  left: 60px;
+  top: 450px;
+  font-family: 'waanwafont';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 34px;
+  text-align: center;
+  text-decoration-line: underline;
+  color: #000000;
 }

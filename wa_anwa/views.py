@@ -117,15 +117,16 @@ def my_page(request):
     return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
 
 
-def betting(request):
-    return render(request, 'wa_anwa/betting.html')
+def betting(request, id):
+    return render(request, 'wa_anwa/betting.html', {'id':id})
 
 def map(request):
     user = request.user
     if user.is_authenticated:
         participate = Participate.objects.filter(user = user).last()
         lastResult = Result.objects.filter(participation=participate)
-        if lastResult.checked:
+        # if lastResult.checked:
+        if lastResult != False:
             return render(request, 'wa_anwa/map.html')
         else: 
             lastResult.checked = True
