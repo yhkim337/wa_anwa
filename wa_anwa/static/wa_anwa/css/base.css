@@ -20,7 +20,7 @@
     height: 367px;
     left: -135px;
     top: 121px;
-    background: url(pngegg.png);
+    z-index:0;
   }
   
   #cloud_2{
@@ -29,7 +29,7 @@
     height: 236px;
     left: -66px;
     top: 693px;
-    background: url(pngegg.png);
+    z-index:0;
   }
   
   .tab_left{
@@ -125,4 +125,15 @@
     flex-direction:row;
     justify-content:space-around;
     align-items:center;
+  }
+
+
+  .middle-background{
+    position:absolute;
+    z-index:0;
+  }
+
+  .middle-content{
+    position:absolute;
+    z-index:1;
   }

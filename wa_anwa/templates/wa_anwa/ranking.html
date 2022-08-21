@@ -1,8 +1,9 @@
-{% extends 'wa_anwa/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
-
-
 {% block content %}
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'wa_anwa/css/ranking.css' %}"/>
+{% endblock style %}
 <div class = "container">
     <div class="rankingPage">랭킹페이지</div>
     <div class = "rankingModal">
