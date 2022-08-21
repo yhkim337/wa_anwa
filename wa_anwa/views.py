@@ -17,13 +17,13 @@ def time(request):
     today6pm = now.replace(hour=18, minute=0, second=0, microsecond=0)
     if now < today8am:
         time=today8am
-        return JsonResponse({'hour': "오전 8시", 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today8am - datetime.timedelta(hours=4)})
+        return JsonResponse({'hour': 8, 'date':time.isoformat()[:10], 'endtime':today8am - datetime.timedelta(hours=4)})
     elif now >= today8am and now < today6pm:
         time=today6pm
-        return JsonResponse({'hour': "오후 6시", 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today6pm - datetime.timedelta(hours=4)})
+        return JsonResponse({'hour': 18, 'date':time.isoformat()[:10], 'endtime':today6pm - datetime.timedelta(hours=4)})
     else:
         time = today8am + datetime.timedelta(days=1)
-        return JsonResponse({'hour': "오전 8시", 'day':time.day, 'month':time.month ,'year':time.year,'endtime':today8am + datetime.timedelta(hours=20)})
+        return JsonResponse({'hour': 8, 'date':time.isoformat()[:10],'endtime':today8am + datetime.timedelta(hours=20)})
 
 def index(request):
     return render(request, 'wa_anwa/index.html')
@@ -44,8 +44,7 @@ def ranking(request):
     today = datetime.date.today()
     m = today.month
     bettings = Betting.objects.filter(date_year='2022', date_month = m)
-    bettings = Betting.objects.filter()
-        # 사용자 별로 이번 달의 배팅 안에서 연결된 Participate 불러오기 
+    # 사용자 별로 이번 달의 배팅 안에서 연결된 Participate 불러오기 
     for k in range(len_user):
         temp_user = users[k]
         for i in range(len(bettings)):
@@ -84,20 +83,12 @@ def ranking(request):
     for i in range(len(ranking)):
         temp = ranking[i][2]
         if temp.pk == user_pk:
-
-            
-            user_ranking = temp
-            user_ranking_Num = i
-            if all_HitRate[0][temp.pk-1] == 0:
-                user_HitRate = 0
-            else:
-                user_HitRate = all_HitRate[0][temp.pk-1]/(all_HitRate[0][temp.pk-1] + all_HitRate[1][temp.pk-1]) *100
-            user_Point = copy_all_Participate[temp.pk-1]
-            break
+            user_ranking.append(i)
+            user_ranking.append(temp)
 
     return render( request, 'wa_anwa/ranking.html', {'ranking':ranking, 'user_ranking':user_ranking, 'month': m })
 
-    return render( request, 'wa_anwa/ranking.html', { 'export_ranking': export_ranking,'ranking':ranking,'ranking_Num':ranking_Num, 'ranking_HitRate': ranking_HitRate, 'user_ranking':user_ranking,'user_ranking_Num':user_ranking_Num ,'user_HitRate':user_HitRate , 'user_Point': user_Point ,'month': m })
+
 
 def my_page(request):
     # 유저 객체를 불어와서 전달
@@ -107,8 +98,8 @@ def my_page(request):
     # 이번 달에 진행한 배팅을 모두 불러온다.
     today = datetime.date.today()
     m = today.month
+    bettings = Betting.objects.filter(date_year='2022', date_month = m)
 
-    bettings = Betting.objects.filter()
 
     # 이번 달 진행한 배팅을 불러와 적중률 계산하고 달력 표시용 데이터 수집
     hitRate = []
@@ -121,56 +112,20 @@ def my_page(request):
             for j in range(len(participates)):
                 participate = participates[j]
                 result = Result.filter(participation = participate)
-                
-
+            
                     # 적중률 계산을 위해서 성공 실패 횟수를 저장
-                    if result.win == participate.choice:
-                        hitRate[0] += 1
-                        calender[day][0] = 1
-                        calender[day][2] = participate.point
-
-                    elif result.win != participate.choice:
-                        hitRate[1] += 1
-                        calender[day][0] = 2
-                        calender[day][2] = -1 * participate.point
-            elif len(participates) != 0:
-                return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'calender': calender, 'month':m})
-
-    today=date.today()
-    c=cd.Calendar(firstweekday=1)
-    monthcal=[]
-    # 주 단위로 나눠서 담기
-    for i in c.monthdayscalendar(today.year,today.month):
-        
-        weekcal=[]
-        for j in range(len(i)):
-            buffer = [0,0,0]
-            for k in range(31):
-                if i[j] == calender[k][1]:
-                    print(i[j])
-                    buffer[1] = i[j]
-                    buffer[0] = calender[k][0]
-                    buffer[2] = calender[k][2]
-                    break
-            weekcal.append(buffer)
-        monthcal.append(weekcal)
-
-
-    if hitRate[0] == 0:
-        user_hitRate = 0
-    else:
-        user_hitRate = hitRate[0]/(hitRate[0] + hitRate[1]) *100
+                if result.win == participate.choice:
+                    hitRate[0] += 1
+                    calender[day][0] = 1
+                    calender[day][2] = participate.point
 
                 elif result.win == False:
                     hitRate[1] += 1
                     calender[day] = False
     user_hitRate = hitRate[0]//hitRate[0] + hitRate[1]
+    return render(request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
+  
 
-    return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
-
-
-def betting(request,id):
-    return render(request, 'wa_anwa/map.html', {'id':id})
 
 def map(request):
     user = request.user
@@ -197,7 +152,10 @@ def createBetting(time):
     date=datetime.date.today().isoformat()
     for i in regionlist:
         Betting.objects.create(region=i, time=time, date=date)
-    return
+    return ()
 
-schedule.every().day.at("8:00").do(createBetting(8))
-schedule.every().day.at("18:00").do(createBetting(18))
+
+# schedule.every().day.at("08:00").do(createBetting(8))
+# schedule.every().day.at("18:00").do(createBetting(18))
+
+
