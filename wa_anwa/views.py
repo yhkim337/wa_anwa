@@ -134,12 +134,12 @@ def mypage(request):
                     calender[day][0] = 1
                     calender[day][2] = participate.point
 
-                    elif result.win != participate.choice:
-                        hitRate[1] += 1
-                        calender[day][0] = 2
-                        calender[day][2] = -1 * participate.point
-            elif len(participates) != 0:
-                return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'calender': calender, 'month':m})
+                elif result.win != participate.choice:
+                    hitRate[1] += 1
+                    calender[day][0] = 2
+                    calender[day][2] = -1 * participate.point
+                elif len(participates) != 0:
+                    return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'calender': calender, 'month':m})
 
     today=date.today()
     c=cd.Calendar(firstweekday=1)
