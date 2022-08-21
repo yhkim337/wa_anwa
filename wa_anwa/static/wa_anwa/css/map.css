@@ -7,82 +7,9 @@
   stroke-linejoin:round;
   stroke: black;
   stroke-width: 2;
-}
-#CD11110 {
   fill: #ffffff;
 }
-#CD11140 {
-  fill: #ffffff;
-}
-#CD11170 {
-  fill: #ffffff;
-}
-#CD11200 {
-  fill: #ffffff;
-}
-#CD11215 {
-  fill: #ffffff;
-}
-#CD11230 {
-  fill:#ffffff;
-}
-#CD11260 {
-  fill: #ffffff;
-}
-#CD11290 {
-  fill: #ffffff;
-}
-#CD11305 {
-  fill: #ffffff;
-}
-#CD11320 {
-  fill: #ffffff;
-}
-#CD11350 {
-  fill: #ffffff;
-}
-#CD11380 {
-  fill: #ffffff;
-}
-#CD11410 {
-  fill: #ffffff;
-}
-#CD11440 {
-  fill: #ffffff;
-}
-#CD11470 {
-  fill: #ffffff;
-}
-#CD11500 {
-  fill: #ffffff;
-}
-#CD11530 {
-  fill: #ffffff;
-}
-#CD11545 {
-  fill: #ffffff;
-}
-#CD11560 {
-  fill: #ffffff;
-}
-#CD11590 {
-  fill: #ffffff;
-}
-#CD11620 {
-  fill: #ffffff;
-}
-#CD11650 {
-  fill: #ffffff;
-}
-#CD11680 {
-  fill: #ffffff;
-}
-#CD11710 {
-  fill: #ffffff;
-}
-#CD11740 {
-  fill: #ffffff;
-}
+
 .LINE {
   stroke-linejoin:round;
   stroke: #ffffff;
@@ -101,6 +28,10 @@
   /* alignment-baseline: middle; */
 }
 
+#seoulmap {
+  z-index: 2;
+}
+
 #map-background {
   position: absolute;
   width: 362px;
@@ -109,6 +40,7 @@
   top: 171px;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 40px;
+  z-index: -1;
 }
 
 #question {
@@ -130,16 +62,16 @@
   position: absolute;
   width: 80px;
   height: 64.38px;
-  left: 30px;
-  top: 400px;
+  left: 50px;
+  top: 550px;
 }
 
 #selectprovince {
   position: absolute;
   width: 271px;
   height: 51px;
-  left: 60px;
-  top: 450px;
+  left: 90px;
+  top: 575px;
   font-family: 'waanwafont';
   font-style: normal;
   font-weight: 400;
@@ -147,5 +79,32 @@
   line-height: 34px;
   text-align: center;
   text-decoration-line: underline;
+  color: #000000;
+}
+
+#modal {
+  box-sizing: border-box;
+  position: absolute;
+  width: 344px;
+  height: 504px;
+  left: 230px;
+  top: 180px;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid #000000;
+  border-radius: 40px;
+}
+
+#region-name {
+  position: absolute;
+  width: 213px;
+  height: 64px;
+  left: 34px;
+  top: 185px;
+  font-family: 'waanwafont';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 70px;
+  line-height: 80px;
+  text-align: center;
   color: #000000;
 }
