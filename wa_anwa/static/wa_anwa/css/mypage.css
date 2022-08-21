@@ -1,0 +1,121 @@
+.container {
+    text-align: center;
+    z-index: 100;
+}
+
+.myPage {
+    position: absolute;
+    width: 298px;
+    height: 157px;
+    left: 46px;
+    top: 100px;
+
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 69px;
+    text-align: center;
+    text-decoration-line: underline;
+
+    color: #000000;
+}
+
+
+.myPageModal {
+    position: absolute;
+    width: 362px;
+    height: 549px;
+    left: 15px;
+    top: 171px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+}
+
+.myPageTitle {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-between;
+}
+
+.myPageImg{
+    width: 90px;
+    height: 90px;
+    margin-top: 40px;
+    margin-left: 40px;
+    border-radius: 10px;
+    margin-right: 20px;
+}
+
+.myPageProfile{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 57px;
+    text-decoration-line: underline;
+    margin-right: 70px;
+
+    color: #000000;
+
+}
+
+.myPageProfile p {
+
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.calenderTitle{
+    margin-top: 10px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 69px;
+
+    color: #000000;
+}
+.calenderTitle p{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.calender {
+    margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+    border-radius: 10%;
+}
+
+.week-date {
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+}
+
+.day {
+    height: 60px;
+    width: 50px;
+
+
+    
+}
+.day p{
+    margin: 0 0 0 0;
+    height: 10px;
+    /* font-size: 10px; */
+    
+}
+
+.dayNum {
+    height: 20px;
+    margin-top: 0px;
+    font-size: 20px;
+}
+
+.dayPoint, .emo{
+    height: 20px;
+    padding-top:5px;
+    margin-top: 5px;
+    font-size: 10px;
+}
