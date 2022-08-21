@@ -1,10 +1,14 @@
 {% extends "base.html" %}
 {% load static %} 
-{% block style %} 
+
+{% block style %}
+    <link rel="stylesheet" type="text/css" href='{% static sass_src "wa_anwa/css/map.css" %}'/>
 {% endblock style %}
 {% block js %} 
+
 <script type="module" src="{% static 'wa_anwa/js/map.js' %}"></script>
 {% endblock js %}
+
 {% block content %}
 <body>
     <div style='background: skyblue'>

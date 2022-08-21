@@ -43,8 +43,7 @@ def ranking(request):
     year = today.year
     m = today.month
 
-    bettings = Betting.objects.filter(date__year= str(year),
-                      date__month=str(m))
+    bettings = Betting.objects.filter()
     
     # 사용자 별로 이번 달의 배팅 안에서 연결된 Participate 불러오기 
 
@@ -109,7 +108,10 @@ def ranking(request):
             
             user_ranking = temp
             user_ranking_Num = i
-            user_HitRate = all_HitRate[0][temp.pk-1]/(all_HitRate[0][temp.pk-1] + all_HitRate[1][temp.pk-1]) *100
+            if all_HitRate[0][temp.pk-1] == 0:
+                user_HitRate = 0
+            else:
+                user_HitRate = all_HitRate[0][temp.pk-1]/(all_HitRate[0][temp.pk-1] + all_HitRate[1][temp.pk-1]) *100
             user_Point = copy_all_Participate[temp.pk-1]
             break
 
@@ -125,8 +127,7 @@ def mypage(request):
     today = datetime.date.today()
     year = today.year
     m = today.month
-    bettings = Betting.objects.filter(date__year= str(year),
-                      date__month=str(m))
+    bettings = Betting.objects.filter()
 
     # 이번 달 진행한 배팅을 불러와 적중률 계산하고 달력 표시용 데이터 수집
     hitRate = [0,0]
@@ -179,16 +180,18 @@ def mypage(request):
             weekcal.append(buffer)
         monthcal.append(weekcal)
 
-    
 
-    user_hitRate = hitRate[0]/(hitRate[0] + hitRate[1]) *100
+    if hitRate[0] == 0:
+        user_hitRate = 0
+    else:
+        user_hitRate = hitRate[0]/(hitRate[0] + hitRate[1]) *100
 
 
     return render( request, 'wa_anwa/mypage.html', {'monthcal':monthcal,'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
 
 
-def betting(request):
-    return render(request, 'wa_anwa/betting.html')
+def betting(request,id):
+    return render(request, 'wa_anwa/map.html', {'id':id})
 
 def map(request):
     user = request.user
