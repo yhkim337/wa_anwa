@@ -1,21 +1,20 @@
 {% extends "base.html" %}
-{% load static %} 
-
+{% load static %}
+{% comment %} {% load sass_tags %} {% endcomment %}
 {% block style %}
-    <link rel="stylesheet" type="text/css" href='{% static sass_src "wa_anwa/css/map.css" %}'/>
+<link rel="stylesheet" type="text/css" href="{% static 'wa_anwa/css/map.css' %}"/>
 {% endblock style %}
 {% block js %} 
-
-<script type="module" src="{% static 'wa_anwa/js/map.js' %}"></script>
+    <script type="module" src="{% static 'wa_anwa/js/map.js' %}"></script>
 {% endblock js %}
-
 {% block content %}
 <body>
+    <div id='map-background'></div>
     <div style='background: skyblue'>
-        <p>배팅 남은 시간</p>
+        <p></p>
         <div id="HourCountdown"></div>
     </div>
-    <svg style='background: rgba(255,255,255,0);overflow:visible' height="80" width="80" viewBox="0 -300 200 200" xmlns="http://www.w3.org/2000/svg">
+    <svg id='seoulmap' style='background: rgba(255,255,255,0);overflow:visible' height="80" width="80" viewBox="0 -300 170 170" xmlns="http://www.w3.org/2000/svg">
         <defs>
             <filter id="dropshadow">
                 <feGaussianBlur in="SourceAlpha" stdDeviation="7" />
@@ -60,8 +59,8 @@
         <path id="송파구" class="OUTLINE" onclick="showbettingmodal('송파구')" d="M 621 374 l 6 2 4 2 4 4 0 8 -2 5 -1 3 0 7 5 2 8 5 5 3 8 4 3 2 5 3 5 2 -4 3 0 6 -3 10 4 5 5 3 10 0 9 3 5 5 -1 4 -2 7 -3 9 -4 3 -5 4 -5 5 -2 6 -3 7 -5 5 -10 0 -6 0 0 8 -4 5 -6 -2 -2 -1 -1 4 -4 -5 -3 -4 -5 -10 -2 -2 -4 -7 -3 -5 -3 -5 -3 -6 -5 -5 -5 -4 -6 -3 -5 -3 -5 -2 -12 -4 -3 -2 -6 -2 -7 -1 -6 -2 -1 -10 -1 -6 -1 -13 0 -4 0 -10 6 2 5 1 5 1 5 -1 6 -3 8 -5 3 -2 3 -3 11 -12 5 -4 5 -5 4 -5 z " />
         <path id="강동구" class="OUTLINE" onclick="showbettingmodal('강동구')" d="M 726 320 l 1 7 3 9 0 9 1 9 1 10 1 5 -1 -1 -5 -1 -3 0 -4 2 -11 0 -8 1 -5 6 -4 5 -4 6 -2 4 -1 8 -4 7 -3 2 1 1 -1 2 -6 7 -1 8 -5 -2 -5 -3 -3 -2 -8 -4 -5 -3 -8 -5 -5 -2 0 -7 1 -3 2 -5 0 -8 -4 -4 -4 -2 -6 -2 -7 0 2 -4 2 -5 2 -10 4 -10 1 -1 4 -6 7 -6 5 -3 6 -3 8 -3 4 -1 5 0 11 0 9 -4 7 -5 8 -6 11 -6 11 0 0 7 3 6 z " />
         </g><g filter="url(#dropshadow2)"></g><g filter="url(#dropshadow2)"><text id="LCD11110" class="TEXT" x="399" y="277">종로구</text>
-        <text id="LCD11140" class="TEXT" x="433" y="338"><a href="">중구</a></text>
-        <text id="LCD11170" class="TEXT" x="407" y="395">용산구</text>
+        <text id="중구" class="TEXT" x="433" y="338">중구</a></text>
+        <text id="용산구" class="TEXT" x="407" y="395">용산구</text>
         <text id="LCD11200" class="TEXT" x="505" y="356">성동구</text>
         <text id="LCD11215" class="TEXT" x="577" y="365">광진구</text>
         <text id="LCD11230" class="TEXT" x="528" y="294">동대문구</text>
@@ -86,47 +85,46 @@
         <text id="LCD11740" class="TEXT" x="675" y="358">강동구</text>
         </g>
     </svg>
-    <div id="bettingmodal" class="bettingmodal">
-        <div>
-            <p id="region-name"></p>
-            <button id="bettingmodalclose">닫기</button>
-        </div>
-        <span>오늘</span>
-        <span id="8amor6pm"></span>
-        <span>
-            <img id="waanwa-logo" src="{% static 'wa_anwa/img/waanwa_logo.png' %}"/>
-        </span>
-        <div>
-            현재 와안와 & 일기예보
-        </div>
-        <div>
-            <svg width="293" height="24" viewBox="0 0 293 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect width="293" height="24" rx="12" fill="url(#paint0_linear_61_468)"/>
-                <rect x="0.5" y="0.5" width="292" height="23" rx="11.5" stroke="black" stroke-opacity="0.1"/>
-                <defs>
-                <linearGradient id="paint0_linear_61_468" x1="293" y1="12" x2="-9.1227" y2="12" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#A5D0FD"/>
-                <stop offset="1" stop-color="#979CA0"/>
-                </linearGradient>
-                </defs>
-            </svg> {% comment %} 그래프 {% endcomment %}
+    <img id="selectprovince_logo" src="{% static 'wa_anwa/img/waanwa_logo.png' %}"/>
+    <div id="selectprovince">할 구를 선택하세요</div>
+    <div id="modal">
+        <div id="bettingmodal" class="bettingmodal">
+            <div>
+                <p id="region-name">중구</p>
+                <button id="bettingmodalclose">닫기</button>
+            </div>
+            <span>오늘</span>
+            <span id="8amor6pm"></span>
+            <div>
+                현재 와안와 & 일기예보
+            </div>
+            <div>
+                <svg width="293" height="24" viewBox="0 0 293 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="293" height="24" rx="12" fill="url(#paint0_linear_61_468)"/>
+                    <rect x="0.5" y="0.5" width="292" height="23" rx="11.5" stroke="black" stroke-opacity="0.1"/>
+                    <defs>
+                    <linearGradient id="paint0_linear_61_468" x1="293" y1="12" x2="-9.1227" y2="12" gradientUnits="userSpaceOnUse">
+                    <stop stop-color="#A5D0FD"/>
+                    <stop offset="1" stop-color="#979CA0"/>
+                    </linearGradient>
+                    </defs>
+                </svg> {% comment %} 그래프 {% endcomment %}
+                <img id="waanwa-logo" src="{% static 'wa_anwa/img/현황 물방울.png' %}"/>
+                {% comment %} 물방울, js에서 style로 left 줄 것 {% endcomment %}
 
-            <img id="waanwa-logo" src="{% static 'wa_anwa/img/현황 물방울.png' %}"/>
-
-            {% comment %} 물방울, js에서 style로 left 줄 것 {% endcomment %}
-                
+            </div>
+            <div>
+            당신의 선택은?
+            </div>
+            <div id="inputdiv">
+                <input type='radio' id="wa" name="selectwaanwa" value='와'/>
+                <input type='radio' id="anwa" name="selectwaanwa" value='안와'/>
+                <input type="number" id="pointselect" placeholder="포인트를 입력하세요" min="0" max="{{user_point}}">
+            </div>
+            <div>
+                <input type="button" id="submitbutton" disabled="disabled" value="제출"/>
+            </div>
         </div>
-    <div>
-        당신의 선택은?
-    </div>
-    <div id="inputdiv">
-        <input type='radio' id="wa" name="selectwaanwa" value='와'/>
-        <input type='radio' id="anwa" name="selectwaanwa" value='안와'/>
-        <input type="number" id="pointselect" placeholder="포인트를 입력하세요" min="0" max="{{user_point}}">
-    </div>
-    <div>
-        <input type="button" id="submitbutton" disabled="disabled" value="제출"/>
-    </div>
     </div>
 </body>
 {% endblock content %}

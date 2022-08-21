@@ -97,6 +97,7 @@ def ranking(request):
 
     return render( request, 'wa_anwa/ranking.html', {'ranking':ranking, 'user_ranking':user_ranking, 'month': m })
 
+    return render( request, 'wa_anwa/ranking.html', { 'export_ranking': export_ranking,'ranking':ranking,'ranking_Num':ranking_Num, 'ranking_HitRate': ranking_HitRate, 'user_ranking':user_ranking,'user_ranking_Num':user_ranking_Num ,'user_HitRate':user_HitRate , 'user_Point': user_Point ,'month': m })
 
 def my_page(request):
     # 유저 객체를 불어와서 전달

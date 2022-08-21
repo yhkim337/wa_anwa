@@ -137,6 +137,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATICFILES_DIRS=[
+    os.path.join(BASE_DIR, 'wa_anwa', 'static')
+]
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+#static 파일들이 어디에 있는지를 쓰는곳
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -164,9 +169,7 @@ SOCIALACCOUNT_LOGIN_ON_GET = False
 
 # request status 상태값 variables 여기에 정의하기
 
-STATICFILES_DIRS=[
-    os.path.join(BASE_DIR, 'accounts', 'static')
-] #static 파일들이 어디에 있는지를 쓰는곳
+
 
 AUTH_USER_MODEL = 'accounts.User'
 
