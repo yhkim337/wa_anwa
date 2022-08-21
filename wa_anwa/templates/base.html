@@ -6,14 +6,11 @@
     {% load static %}
     {% load sass_tags %} {% load socialaccount %}
     {%providers_media_js%}
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'wa_anwa/css/base.css' %}"/>
-    
+    <link rel="stylesheet" type="text/css" href="{% static 'wa_anwa/css/base.css' %}"/>
     {% block style %}
     {% endblock style %}
-
     <script type="module" src="{% static 'wa_anwa/js/base.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-
     {% block js %}
     {% endblock js %}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
