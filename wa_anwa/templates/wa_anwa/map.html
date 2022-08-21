@@ -39,7 +39,7 @@
                 </feMerge>
             </filter>
         </defs>
-        <g filter="url(#dropshadow)"><path id="종로구" class="OUTLINE" d="M 455 297 l 4 -2 1 0 1 0 3 -1 4 5 7 3 2 6 0 8 -11 2 -11 1 -8 0 -9 1 -8 1 -9 1 -9 -2 -10 -1 -9 1 -4 3 -2 3 -6 -6 -3 -4 -5 -6 -4 -5 -2 -5 5 -3 0 -6 0 -10 0 -9 1 -9 -3 -4 -2 0 -2 0 -1 -4 0 -9 -5 -9 1 -10 -1 -11 -1 -6 2 -6 5 -2 7 -3 10 -2 2 -1 3 0 1 0 4 -2 8 -1 3 6 4 1 3 8 3 10 1 6 3 5 0 9 0 7 -1 5 -6 3 -6 4 -1 5 6 4 5 3 5 4 9 1 10 0 4 4 3 4 5 10 1 3 z " />
+        <g filter="url(#dropshadow)" class="wrap"><path id="종로구" class="OUTLINE" d="M 455 297 l 4 -2 1 0 1 0 3 -1 4 5 7 3 2 6 0 8 -11 2 -11 1 -8 0 -9 1 -8 1 -9 1 -9 -2 -10 -1 -9 1 -4 3 -2 3 -6 -6 -3 -4 -5 -6 -4 -5 -2 -5 5 -3 0 -6 0 -10 0 -9 1 -9 -3 -4 -2 0 -2 0 -1 -4 0 -9 -5 -9 1 -10 -1 -11 -1 -6 2 -6 5 -2 7 -3 10 -2 2 -1 3 0 1 0 4 -2 8 -1 3 6 4 1 3 8 3 10 1 6 3 5 0 9 0 7 -1 5 -6 3 -6 4 -1 5 6 4 5 3 5 4 9 1 10 0 4 4 3 4 5 10 1 3 z " />
         <path id="중구" class="OUTLINE"  d="M 477 316 l 0 9 5 5 -1 3 -4 5 -4 5 -5 4 -4 7 -3 4 -4 3 -4 10 -2 -1 -3 -7 -2 -5 -2 1 -1 0 -2 -1 -3 1 0 0 -3 1 -4 2 -5 -5 -6 -3 -10 -3 -4 -1 -3 -1 -2 2 -4 -1 -3 -1 -9 0 -2 2 -4 3 0 -7 1 -4 -2 -2 0 -1 6 -3 6 -4 -1 -2 -2 -5 2 -3 4 -3 9 -1 10 1 9 2 9 -1 8 -1 9 -1 8 0 11 -1 z " />
         <path id="용산구" class="OUTLINE" d="M 394 349 l 3 1 4 1 2 -2 3 1 4 1 10 3 6 3 5 5 4 -2 3 -1 0 0 3 -1 2 1 1 0 2 -1 2 5 3 7 2 1 5 9 6 2 2 9 -4 5 -4 5 -5 6 -3 4 -5 4 -5 5 -5 4 -5 3 -8 8 -5 8 -7 3 -7 -1 -10 -4 -3 -1 -6 -3 -6 -5 -5 -3 -6 -3 -9 -3 1 -5 0 -10 -2 -8 -6 -11 5 -2 4 -1 5 -4 5 -6 2 -5 3 -6 6 -5 0 -3 -2 -3 4 -3 2 -2 z " />
         <path id="성동구" class="OUTLINE" d="M 511 315 l 7 4 6 6 4 4 6 5 2 0 15 3 4 0 -5 20 -3 5 -5 12 -3 7 -10 20 -7 -4 -5 -3 -4 -4 -10 -3 -10 0 -7 0 -12 0 -8 4 -2 -9 -6 -2 -5 -9 4 -10 4 -3 3 -4 4 -7 5 -4 4 -5 4 -5 1 -3 -5 -5 0 -9 6 1 11 -1 5 -2 2 -1 6 0 z " />
@@ -93,42 +93,43 @@
     </svg>
     <img id="selectprovince_logo" src="{% static 'wa_anwa/img/waanwa_logo.png' %}"/>
     <div id="selectprovince">할 구를 선택하세요</div>
-    <div id="modal">
+    <div id="modal" class="modal">
         <div id="bettingmodal" class="bettingmodal">
             <div>
-                <p id="region-name">중구</p>
+                <p id="region-name"></p>
                 <button id="bettingmodalclose">닫기</button>
             </div>
-            <span>오늘</span>
-            <span id="8amor6pm"></span>
-            <div>
-                현재 와안와 & 일기예보
+            {% comment %} <span>오늘</span> {% endcomment %}
+            <span id="amorpm"></span> 
+            <div id="forecast-container">
+                <div id="forecast_text">
+                    현재 와안와 & 일기예보
+                </div>
+                <div id="current_waanwa">
+                    <svg width="293" height="24" viewBox="0 0 293 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="293" height="24" rx="12" fill="url(#paint0_linear_61_468)"/>
+                        <rect x="0.5" y="0.5" width="292" height="23" rx="11.5" stroke="black" stroke-opacity="0.1"/>
+                        <defs>
+                        <linearGradient id="paint0_linear_61_468" x1="293" y1="12" x2="-9.1227" y2="12" gradientUnits="userSpaceOnUse">
+                        <stop stop-color="#A5D0FD"/>
+                        <stop offset="1" stop-color="#979CA0"/>
+                        </linearGradient>
+                        </defs>
+                    </svg> {% comment %} 그래프 {% endcomment %}
+                    <img id="waanwa_drop" src="{% static 'wa_anwa/img/현황 물방울.png' %}"/>
+                    {% comment %} 물방울, js에서 style로 left 줄 것 {% endcomment %}
+                </div>
             </div>
-            <div>
-                <svg width="293" height="24" viewBox="0 0 293 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="293" height="24" rx="12" fill="url(#paint0_linear_61_468)"/>
-                    <rect x="0.5" y="0.5" width="292" height="23" rx="11.5" stroke="black" stroke-opacity="0.1"/>
-                    <defs>
-                    <linearGradient id="paint0_linear_61_468" x1="293" y1="12" x2="-9.1227" y2="12" gradientUnits="userSpaceOnUse">
-                    <stop stop-color="#A5D0FD"/>
-                    <stop offset="1" stop-color="#979CA0"/>
-                    </linearGradient>
-                    </defs>
-                </svg> {% comment %} 그래프 {% endcomment %}
-                <img id="waanwa-logo" src="{% static 'wa_anwa/img/현황 물방울.png' %}"/>
-                {% comment %} 물방울, js에서 style로 left 줄 것 {% endcomment %}
-
-            </div>
-            <div>
+            <div id="yourselect">
             당신의 선택은?
             </div>
             <div id="inputdiv">
-                <input type='radio' id="wa" name="selectwaanwa" value='와'/>
-                <input type='radio' id="anwa" name="selectwaanwa" value='안와'/>
+                <input type='radio' id="wa" name="selectwaanwa" value="와"/>와
+                <input type='radio' id="anwa" name="selectwaanwa" value="안와"/>안와
                 <input type="number" id="pointselect" placeholder="포인트를 입력하세요" min="0" max="{{user_point}}">
             </div>
             <div>
-                <input type="button" id="submitbutton" disabled="disabled" value="제출"/>
+                <input type="button" id="submitbutton" disabled="disabled" value="입력"/>
             </div>
         </div>
     </div>

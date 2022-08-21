@@ -1,34 +1,44 @@
-const a = (async () => {
-    const response = await axios.get('wa_anwa/time');
-    return response
-  })();
 
 const checkbox = document.getElementById("submitbutton");
 
-const bettingmodalclick = () => {
-    document.getElementsByClassName("OUTLINE").addEventListener("click", showbettingmodal(this.id));
-}
+const wrap = document.querySelector('.wrap')
+const items = document.querySelectorAll('.OUTLINE')
+wrap.addEventListener('click', e => {
+    const target = e.target
+    if (target.classList.contains('OUTLINE')) {
+        showbettingmodal(target.id)
+    }
+});
 
-function showbettingmodal(region) {
-    bettingmodal = document.getElementById("bettingmodal");
-    bettingmodal.classList.add("show");
+document.getElementById("bettingmodalclose").addEventListener("click", ()=>document.getElementById("modal").classList.remove("show"))
+
+
+const showbettingmodal =  async (region) => {
+    const response = await axios.get('time');
+    const modal = document.getElementById("modal")
+    modal.classList.add("show");
     document.getElementById("region-name").innerHTML = region
-    document.getElementById("8amor6pm").innerHTML = `${a.data.hour}시`
+    document.getElementById("amorpm").innerHTML = `${response.data.hour}시`
 };
 
+
+
+
+
 const bettingSubmit = async () => {
-    region = document.getElementById("region-name").innerHTML
-    wa = document.getElementById("wa")
+    const region = document.getElementById("region-name").innerHTML
+    const wa = document.getElementById("wa")
+    const a = await axios.get('time');
     const data = new FormData();
     data.append("region", region);
     data.append("time", a.data.hour);
     data.append("date", a.data.date);
-    data.append("choice", wa.checked ? True:False);
+    data.append("choice", wa.checked);
     data.append("point", document.getElementById("pointselect").value);
-    const response = await axios.post('wa_anwa/createparticipate');
+    const response = await axios.post('createparticipate');
     document.getElementById(region).style.backgroundColor =  wa.checked ? "blue" : "black";
-    bettingmodal = document.getElementById("bettingmodal");
-    bettingmodal.classList.remove("show");
+    const modal = document.getElementById("modal");
+    modal.classList.remove("show");
 };
 
 const Ablesubmit = () => {
@@ -48,6 +58,6 @@ const Disablesubmit = () => {
             Disablesubmit();
         }
     })
-    document.getElementById("submitbutton").addEventListener("click", bettingSubmit())
+    document.getElementById("submitbutton").addEventListener("click", ()=>bettingSubmit())
 })();
 

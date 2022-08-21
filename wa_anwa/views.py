@@ -10,6 +10,7 @@ from django.http import JsonResponse
 import schedule
 import time
 from datetime import date
+from django.views.decorators.csrf import csrf_exempt
 from datetime import datetime as dt
 
 # Create your views here.
@@ -231,6 +232,7 @@ def map(request):
     else:
         return render(request, 'wa_anwa/index.html')
 
+@csrf_exempt
 def createparticipate(request):
     betting = Betting.objects.filter(region=request.POST['region'], time=request.POST['time'], date=request.POST['date'])
     Participate.objects.create(user=request.user, betting=betting, choice=request.POST['choice'], point=request.POST['point'])
