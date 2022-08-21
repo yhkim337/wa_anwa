@@ -87,19 +87,26 @@
   position: absolute;
   width: 344px;
   height: 504px;
-  left: 230px;
+  left: 20px;
   top: 180px;
   background: rgba(255, 255, 255, 0.95);
   border: 1px solid #000000;
   border-radius: 40px;
 }
 
+/* .modal .show{
+  display:block;
+}
+.modal{
+  display: none;
+} */
+
 #region-name {
   position: absolute;
-  width: 213px;
-  height: 64px;
-  left: 34px;
-  top: 185px;
+  width: 100px;
+  height: 20px;
+  left: 10px;
+  top: 0px;
   font-family: 'waanwafont';
   font-style: normal;
   font-weight: 400;
@@ -108,3 +115,80 @@
   text-align: center;
   color: #000000;
 }
+
+#bettingmodalclose {
+  font-family: 'waanwafont';
+  font-size: 30px;
+  position: absolute;
+  width: 100px;
+  height: 45.23px;
+  left: 200px;
+  top: 10px;
+  background: rgba(75, 161, 250, 0.3);
+  border-radius: 10px;
+}
+
+#forecast_text {
+  position: absolute;
+  width: 221px;
+  height: 49px;
+  left: 60px;
+  top: 200px;
+
+  font-family: 'waanwafont';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 34px;
+  text-align: center;
+
+  color: #000000;
+}
+
+#current_waanwa {
+  box-sizing: border-box;
+
+position: absolute;
+width: 293px;
+height: 24px;
+left: 25px;
+top: 250px;
+
+background: linear-gradient(270deg, #A5D0FD 0%, #979CA0 103.11%);
+border: 1px solid rgba(0, 0, 0, 0.1);
+border-radius: 100px;
+}
+
+#waanwa_drop {
+  position: absolute;
+width: 30px;
+height: 30px;
+left: 10px;
+top: 0px;
+}
+
+#yourselect {
+  position: absolute;
+width: 221px;
+height: 58.33px;
+left: 60px;
+top: 300px;
+
+font-family: 'waanwafont';
+font-style: normal;
+font-weight: 400;
+font-size: 30px;
+line-height: 34px;
+text-align: center;
+
+color: #000000;
+}
+
+#inputdiv {
+  position: absolute;
+  width: 221px;
+  height: 58.33px;
+  left: 100px;
+  top: 400px;
+}
+
