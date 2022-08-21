@@ -2,10 +2,14 @@
 {% load static %} 
 
 {% block style %}
-    <link rel="stylesheet" type="text/css" href='{% static sass_src "wa_anwa/css/map.css" %}'/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'wa_anwa/css/map.css' %}"
+/>
 {% endblock style %}
-{% block js %} 
 
+{% block js %}
 <script type="module" src="{% static 'wa_anwa/js/map.js' %}"></script>
 {% endblock js %}
 
