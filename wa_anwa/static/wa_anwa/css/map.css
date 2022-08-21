@@ -94,12 +94,14 @@
   border-radius: 40px;
 }
 
-/* .modal .show{
-  display:block;
-}
-.modal{
+.modal {
   display: none;
-} */
+}
+
+.modal.show {
+  display: block;
+}
+
 
 #region-name {
   position: absolute;

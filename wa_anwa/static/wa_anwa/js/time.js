@@ -1,7 +1,7 @@
 
 
 (async ()=> {
-    const response = await axios.get('wa_anwa/time');
+    const response = await axios.get('time');
     CountDownTimer(response.data.endtime, 'HourCountdown');
 })();
 
