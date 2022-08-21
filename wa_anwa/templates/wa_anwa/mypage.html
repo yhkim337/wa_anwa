@@ -1,4 +1,5 @@
-!{% extends "base.html" %}
+{% extends 'wa_anwa/base.html' %}
+
 {% load static %}
 
 
@@ -9,10 +10,54 @@
     </div>
     <div class="myPageModal">
         <div class = "myPageTitle">
-            <img class="myPageImg" src="" alt="프로필 사진">
+            <img class="myPageImg" src="{{ my_user.profile_img }}" alt="프로필 사진">
             <div class = "myPageProfile">
-                <p>{{my_user.name}}님</p>
+                <p>{{my_user.username}}님</p>
                 <p>와안와율{{user_hitRate}}%</p>
+            </div>
+        </div>
+        <div class="calenderTitle">
+            <p>{{month}}월 와안와 달력</p>
+            <div class="calender">
+                {% for day in calender %}
+                
+                {% endfor %}
+            </div>
+
+            <div class="calender">
+                {% for week in monthcal %}
+                <div class="week-date" id="month-week-date">
+                    {% for date in week %}
+                    {% if date.1 == 0 %}
+                    <div class="date-int">
+                        <span>&nbsp</span>
+                    </div>
+                    {% endif %}
+                    {% if date.1 != 0 %}
+                    {%  if date.0 == 1 %}
+                    <div class = "day">
+                        <p>{{date.1}}일</p>
+                        <img src="https://cdn-icons.flaticon.com/png/512/4436/premium/4436481.png?token=exp=1660988517~hmac=f979e41677d93a3904cb398d3600ec76" alt="동그라미 이미지" srcset="">
+                        <p>맞췄어요</p>
+                        <p>{{date.2}}</p>
+                    </div>
+                    {% elif date.0 == 2 %}
+                    <div class = "day">
+                        <p>{{date.1}}일</p>
+                        <img src="https://cdn-icons-png.flaticon.com/512/6711/6711656.png">
+                        <p>틀렸어요</p>
+                        <p>{{date.2}}</p>
+                    </div>
+                    {% else %}
+                    <div class = "day">
+                        <p>{{date.1}}일</p>
+                        <p>배팅하지 않았어요</p>
+                    </div>
+                    {% endif %}
+                    {% endif %}
+                    {%endfor%}
+                </div>
+                {%endfor%}
             </div>
         </div>
 
