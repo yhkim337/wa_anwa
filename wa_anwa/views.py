@@ -160,9 +160,6 @@ def mypage(request):
             elif len(participates) != 0:
                 return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'calender': calender, 'month':m})
 
-
-
-
     today=date.today()
     c=cd.Calendar(firstweekday=1)
     monthcal=[]
