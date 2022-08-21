@@ -105,9 +105,9 @@
 
 #region-name {
   position: absolute;
-  width: 100px;
+  width: 150px;
   height: 20px;
-  left: 10px;
+  left: 30px;
   top: 0px;
   font-family: 'waanwafont';
   font-style: normal;
@@ -194,3 +194,33 @@ color: #000000;
   top: 400px;
 }
 
+#submitbutton {
+  box-sizing: border-box;
+
+position: absolute;
+width: 80px;
+height: 40px;
+left: 125px;
+top: 450px;
+
+background: rgba(248, 240, 76, 0.5);
+border: 1px solid rgba(0, 0, 0, 0.1);
+border-radius: 20px;
+}
+
+#amorpm {
+  position: absolute;
+  width: 213px;
+  height: 65px;
+  left: 120px;
+  top: 80px;
+
+  font-family: 'waanwafont';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 50px;
+  line-height: 57px;
+  text-align: center;
+
+  color: #000000;
+}

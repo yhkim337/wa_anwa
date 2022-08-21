@@ -90,11 +90,11 @@
     <div id="modal" class="modal">
         <div id="bettingmodal" class="bettingmodal">
             <div>
-                <p id="region-name">중구</p>
+                <p id="region-name"></p>
                 <button id="bettingmodalclose">닫기</button>
             </div>
             {% comment %} <span>오늘</span> {% endcomment %}
-            <span id="8amor6pm"></span>
+            <span id="amorpm"></span> 
             <div id="forecast-container">
                 <div id="forecast_text">
                     현재 와안와 & 일기예보
@@ -118,8 +118,8 @@
             당신의 선택은?
             </div>
             <div id="inputdiv">
-                <input type='radio' id="wa" name="selectwaanwa" value="와"/>
-                <input type='radio' id="anwa" name="selectwaanwa" value='안와'/>
+                <input type='radio' id="wa" name="selectwaanwa" value="와"/>와
+                <input type='radio' id="anwa" name="selectwaanwa" value="안와"/>안와
                 <input type="number" id="pointselect" placeholder="포인트를 입력하세요" min="0" max="{{user_point}}">
             </div>
             <div>
