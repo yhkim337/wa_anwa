@@ -1,0 +1,167 @@
+.container {
+    text-align: center;
+    z-index: 100;
+}
+
+.myPage {
+    position: absolute;
+    width: 298px;
+    height: 157px;
+    left: 46px;
+    top: 100px;
+
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 69px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: #000000;
+}
+
+.myPageTitle{
+    display:flex;
+    flex-direction:row;
+    align-items:space-around;
+    justify-content:center; 
+}
+
+
+.myPageProfile{
+    display:flex;
+    flex-direction:column;
+
+}
+
+
+#myName{
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    text-decoration-line: underline;
+    color: #000000;
+    margin:0px;
+}
+
+#wa_anwaRate{
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 35px;
+    color: #000000;
+    margin:0px;
+}
+
+
+.myPageModal {
+    position: absolute;
+    width: 362px;
+    height: 549px;
+    left: 15px;
+    top: 171px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+}
+
+.myPageTitle {
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: space-around;
+    margin:10px;
+}
+
+.myPageImg{
+    width: 90px;
+    height: 90px;
+    border-radius: 10px;
+}
+
+.myPageProfile{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 57px;
+    text-decoration-line: underline;
+    margin-right: 70px;
+
+    color: #000000;
+
+}
+
+.myPageProfile p {
+
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.calenderTitle{
+    margin-top: 10px;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 69px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
+    color: #000000;
+}
+.calenderTitle p{
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+#calTitle{
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 69px;
+    color: #000000;
+}
+
+.calender {
+    width:300px;
+    margin-left: 0px;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-content: center;;
+    border-radius: 10%;
+}
+
+.week-date {
+    display: flex;
+    flex-direction: row;
+    background-color: #ffffff;
+}
+
+.day {
+    height: 50px;
+    width: 40px; 
+    background-color:rgba(191, 223, 255, 0.5)
+}
+.day p{
+    margin: 0 0 0 0;
+    height: 10px;
+    font-size:15px;    
+}
+
+.dayNum {
+    height: 20px;
+    margin-top: 0px;
+    font-size: 20px;
+}
+
+.dayPoint, .emo{
+    height: 20px;
+    padding-top:5px;
+    margin-top: 5px;
+    font-size: 10px;
+}

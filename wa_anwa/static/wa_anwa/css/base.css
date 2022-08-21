@@ -1,3 +1,8 @@
+@font-face {
+  font-family: 'waanwafont';
+  src: url("./font/waanwafont.woff") format('woff');
+}
+
 .whole_display{
     position: relative;
     width: 390px;
@@ -58,6 +63,7 @@
   .time_left_ms{
     position:absolute;
     top:30px;
+    font-family: 'waanwafont';
   }
   
   .icon_umb_point{
@@ -81,6 +87,7 @@
   .umb_point_umb{
     position:absolute;
     top:30px;
+    font-family: 'waanwafont';
   }
   
   .tab_right{

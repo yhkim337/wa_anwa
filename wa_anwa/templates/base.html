@@ -51,15 +51,15 @@
         <div class="tab_right">
             <div class="betting_btn">
                 <!-- 배팅 페이지 연결하기 -->
-                <a href=""><img class="betting" src="{% static 'wa_anwa/img/base_imgs/아이콘_배팅.png' %}"></a>
+                <a href="{% url 'wa_anwa:map' %}"><img class="betting" src="{% static 'wa_anwa/img/base_imgs/아이콘_배팅.png' %}"></a>
             </div>
             <div class="ranking_btn">
                 <!-- 랭킹 페이지 연결하기 -->
-                <a href=""><img class="ranking" src="{% static 'wa_anwa/img/base_imgs/아이콘_랭킹.png' %}"></a>
+                <a href="{% url 'wa_anwa:ranking' %}"><img class="ranking" src="{% static 'wa_anwa/img/base_imgs/아이콘_랭킹.png' %}"></a>
             </div>
             <div class="mypage_btn">
                 <!-- 마이페이지 연결하기 -->
-                <a href=""><img class="mypage" src="{% static 'wa_anwa/img/base_imgs/아이콘_마이.png' %}"></a>
+                <a href="{% url 'wa_anwa:mypage' %}"><img class="mypage" src="{% static 'wa_anwa/img/base_imgs/아이콘_마이.png' %}"></a>
             </div>   
         </div>
       </div>
