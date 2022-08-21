@@ -20,7 +20,7 @@ def time(request):
     today8am = now.replace(hour=8, minute=0, second=0, microsecond=0)
     today6pm = now.replace(hour=18, minute=0, second=0, microsecond=0)
     if now < today8am:
-        time=today8am
+        time = today8am
         return JsonResponse({'hour': 8, 'date':time.isoformat()[:10], 'endtime':today8am - datetime.timedelta(hours=4)})
     elif now >= today8am and now < today6pm:
         time=today6pm

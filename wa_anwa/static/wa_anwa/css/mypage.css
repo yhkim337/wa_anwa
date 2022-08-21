@@ -42,6 +42,24 @@
     font-size: 50px;
     line-height: 58px;
     text-decoration-line: underline;
+
+#myName{
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    text-decoration-line: underline;
+    color: #000000;
+    margin:0px;
+}
+
+#wa_anwaRate{
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 35px;
     color: #000000;
     margin:0px;
 }
