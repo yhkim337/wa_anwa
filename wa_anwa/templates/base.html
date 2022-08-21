@@ -21,6 +21,7 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="{% static 'wa_anwa/js/base2.js' %}"></script>
+    <script src="{% static 'wa_anwa/js/time.js' %}"></script>
   </head>
   <body>
     <!-- 전체 화면 -->
@@ -31,10 +32,14 @@
       </div>
       <!-- 중간 : 내용 들어갈 곳 -->
       <div class="middle">
+        <div class="middle-background">
           <img class="cloud" id="cloud_1" src="{% static 'wa_anwa/img/base_imgs/구름.png' %}">
           <img class="cloud" id="cloud_2" src="{% static 'wa_anwa/img/base_imgs/구름.png' %}">
+        </div>
+        <div class="middle-content">
           {% block content %}
           {% endblock %}
+        </div>
       </div>
       <!-- 아래 : 탭 들어갈 곳 -->
       <div class="bottom">

@@ -5,8 +5,8 @@ from accounts.models import User
 
 
 class Betting(models.Model):
-    date = models.DateField()
-    time = models.IntegerField()
+    date = models.CharField(max_length=11)
+    time = models.CharField(max_length=6)
     region = models.CharField(max_length=10)
 
     def __str__(self):
