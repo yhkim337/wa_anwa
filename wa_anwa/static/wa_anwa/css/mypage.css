@@ -13,12 +13,47 @@
     font-family: 'Nanum SeACe';
     font-style: normal;
     font-weight: 400;
-    font-size: 40px;
+    font-size: 60px;
     line-height: 69px;
     text-align: center;
     text-decoration-line: underline;
-
     color: #000000;
+}
+
+.myPageTitle{
+    display:flex;
+    flex-direction:row;
+    align-items:space-around;
+    justify-content:center; 
+}
+
+
+.myPageProfile{
+    display:flex;
+    flex-direction:column;
+
+}
+
+
+#myName{
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    text-decoration-line: underline;
+    color: #000000;
+    margin:0px;
+}
+
+#wa_anwaRate{
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 35px;
+    color: #000000;
+    margin:0px;
 }
 
 
@@ -36,16 +71,14 @@
     display: flex;
     flex-direction: row;
     align-content: center;
-    justify-content: space-between;
+    justify-content: space-around;
+    margin:10px;
 }
 
 .myPageImg{
     width: 90px;
     height: 90px;
-    margin-top: 40px;
-    margin-left: 40px;
     border-radius: 10px;
-    margin-right: 20px;
 }
 
 .myPageProfile{
@@ -73,6 +106,10 @@
     font-size: 50px;
     line-height: 69px;
 
+    display:flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items:center;
     color: #000000;
 }
 .calenderTitle p{
@@ -80,10 +117,22 @@
     margin-bottom: 0px;
 }
 
+#calTitle{
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 69px;
+    color: #000000;
+}
+
 .calender {
+    width:300px;
     margin-left: 0px;
     display: flex;
     flex-direction: column;
+    justify-content:center;
+    align-content: center;;
     border-radius: 10%;
 }
 
@@ -94,17 +143,14 @@
 }
 
 .day {
-    height: 60px;
-    width: 50px;
-
-
-    
+    height: 50px;
+    width: 40px; 
+    background-color:rgba(191, 223, 255, 0.5)
 }
 .day p{
     margin: 0 0 0 0;
     height: 10px;
-    /* font-size: 10px; */
-    
+    font-size:15px;    
 }
 
 .dayNum {

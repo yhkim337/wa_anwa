@@ -2,7 +2,11 @@
 {% load static %}
 
 {% block style %}
-    <link rel="stylesheet" type="text/css" href="{% static 'wa_anwa/css/mypage.css' %}"/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'wa_anwa/css/mypage.css' %}"
+/>
 {% endblock style %}
 
 {% block content %}
@@ -11,15 +15,17 @@
         마이페이지
     </div>
     <div class="myPageModal">
-        <div class = "myPageTitle">
-            <img class="myPageImg" src="{{ my_user.profile_img }}" alt="프로필 사진">
+        <div class ="myPageTitle">
+            <div>
+                <img class="myPageImg" src="{{ my_user.profile_img }}" alt="프로필 사진">
+            </div>
             <div class = "myPageProfile">
-                <p>{{my_user.username}}님</p>
-                <p>와안와율{{user_hitRate}}%</p>
+                <p id="myName">{{my_user.username}}님</p>
+                <p id="wa_anwaRate">와안와율{{user_hitRate}}%</p>
             </div>
         </div>
         <div class="calenderTitle">
-            <p>{{month}}월 와안와 달력</p>
+            <p id="calTitle">{{month}}월 와안와 달력</p>
             <div class="calender">
                 {% for day in calender %}
 
