@@ -4,7 +4,10 @@
     <link rel="stylesheet" type="text/css" href="{% static 'wa_anwa/css/map.css' %}" />
 {% endblock style %}
 {% block js %} 
+
+<script type="module" src="{% static 'wa_anwa/js/map.js' %}"></script>
 {% endblock js %}
+
 {% block content %}
 <body>
     <div style='background: skyblue'>
@@ -115,13 +118,13 @@
     <div>
         당신의 선택은?
     </div>
-    <div>
-        <input type='button'  onclick='count("plus")' value='와'/>
-        <input type='button' value='안와'/>
-        <input type="number" placeholder="포인트를 입력하세요" min="0" max="{{user_point}}">
+    <div id="inputdiv">
+        <input type='radio' id="wa" name="selectwaanwa" value='와'/>
+        <input type='radio' id="anwa" name="selectwaanwa" value='안와'/>
+        <input type="number" id="pointselect" placeholder="포인트를 입력하세요" min="0" max="{{user_point}}">
     </div>
     <div>
-        <button onclick="bettingsubmit()">제출</button>
+        <input type="button" id="submitbutton" disabled="disabled" value="제출"/>
     </div>
     </div>
 </body>
