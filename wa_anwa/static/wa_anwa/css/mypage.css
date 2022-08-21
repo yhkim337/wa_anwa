@@ -42,6 +42,24 @@
     font-size: 50px;
     line-height: 58px;
     text-decoration-line: underline;
+
+#myName{
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    text-decoration-line: underline;
+    color: #000000;
+    margin:0px;
+}
+
+#wa_anwaRate{
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 30px;
+    line-height: 35px;
     color: #000000;
     margin:0px;
 }
@@ -134,18 +152,23 @@
     justify-content:center;
     align-content: center;;
     border-radius: 10%;
+    background-color:rgba(255, 255, 255, 0.5);
+    border:#000000;
 }
 
 .week-date {
     display: flex;
     flex-direction: row;
-    background-color: #ffffff;
+    background-color:rgba(255, 255, 255, 0.5);
+    border-radius: 10px;;
 }
 
 .day {
     height: 50px;
     width: 40px; 
-    background-color:rgba(191, 223, 255, 0.5)
+    background-color:rgba(191, 223, 255, 0.5);
+    margin:2px;
+    border-radius:15px;
 }
 .day p{
     margin: 0 0 0 0;
