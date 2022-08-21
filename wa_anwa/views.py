@@ -17,13 +17,13 @@ def time(request):
     today6pm = now.replace(hour=18, minute=0, second=0, microsecond=0)
     if now < today8am:
         time=today8am
-        return JsonResponse({'hour': "오전 8시", 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today8am - datetime.timedelta(hours=4)})
+        return JsonResponse({'hour': 8, 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today8am - datetime.timedelta(hours=4)})
     elif now >= today8am and now < today6pm:
         time=today6pm
-        return JsonResponse({'hour': "오후 6시", 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today6pm - datetime.timedelta(hours=4)})
+        return JsonResponse({'hour': 18, 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today6pm - datetime.timedelta(hours=4)})
     else:
         time = today8am + datetime.timedelta(days=1)
-        return JsonResponse({'hour': "오전 8시", 'day':time.day, 'month':time.month ,'year':time.year,'endtime':today8am + datetime.timedelta(hours=20)})
+        return JsonResponse({'hour': 8, 'day':time.day, 'month':time.month ,'year':time.year,'endtime':today8am + datetime.timedelta(hours=20)})
 
 def index(request):
     return render(request, 'wa_anwa/index.html')
@@ -153,7 +153,7 @@ def createBetting(time):
     date=datetime.date.today().isoformat()
     for i in regionlist:
         Betting.objects.create(region=i, time=time, date=date)
-    return
+    return ()
 
-schedule.every().day.at("8:00").do(createBetting(8))
-schedule.every().day.at("18:00").do(createBetting(18))
+# schedule.every().day.at("08:00").do(createBetting(8))
+# schedule.every().day.at("18:00").do(createBetting(18))

@@ -10,6 +10,6 @@ urlpatterns = [
     path('time/', views.time, name='time'),
     path('createparticipate/', views.createparticipate, name="createparticipate"),
     path('ranking/', views.ranking, name = "ranking"),
-    path('mypage/', views.mypage, name='mypage')
+    path('mypage/', views.my_page, name='mypage')
 ]
 

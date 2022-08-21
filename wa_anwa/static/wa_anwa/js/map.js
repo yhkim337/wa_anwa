@@ -10,7 +10,7 @@ function showbettingmodal(region) {
     bettingmodal = document.getElementById("bettingmodal");
     bettingmodal.classList.add("show");
     document.getElementById("region-name").innerHTML = region
-    document.getElementById("8amor6pm").innerHTML = a.data.hour
+    document.getElementById("8amor6pm").innerHTML = `${a.data.hour}시`
 };
 
 const bettingSubmit = async () => {
@@ -19,7 +19,7 @@ const bettingSubmit = async () => {
     const data = new FormData();
     data.append("region", region);
     data.append("time", a.data.hour);
-    data.append("date", `${a.data.year}.${a.data.month}.${a.data.day}`);
+    data.append("date", `${a.data.year}:${a.data.month}:${a.data.day}`);
     data.append("choice", wa.checked ? True:False);
     data.append("point", document.getElementById("pointselect").value);
     const response = await axios.post('wa_anwa/createparticipate');
