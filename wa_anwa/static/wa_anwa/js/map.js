@@ -5,6 +5,9 @@ const a = (async () => {
 
 const checkbox = document.getElementById("submitbutton");
 
+const bettingmodalclick = () => {
+    document.getElementsByClassName("OUTLINE").addEventListener("click", showbettingmodal(this.id));
+}
 
 function showbettingmodal(region) {
     bettingmodal = document.getElementById("bettingmodal");

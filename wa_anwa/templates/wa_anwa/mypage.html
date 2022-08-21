@@ -19,19 +19,6 @@
         <div class="calenderTitle">
             <p>{{month}}월 와안와 달력</p>
             <div class="calender">
-<<<<<<< HEAD
-                {% for day in calender %}                
-                {% endfor %}
-            </div>
-
-            <div class="calender">
-                {% for week in monthcal %}
-                <div class="week-date" id="month-week-date">
-                    {% for date in week %}
-                    {% if date.1 == 0 %}
-                    <div class="date-int">
-                        <span>&nbsp</span>
-=======
                 {% for day in calender %}
                 <div class="calender">
                     {% for week in monthcal %}
@@ -65,7 +52,6 @@
                         {% endif %}
                         {% endif %}
                         {%endfor%}
->>>>>>> master
                     </div>
                     {%endfor%}
                 </div>
