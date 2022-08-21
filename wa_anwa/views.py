@@ -206,5 +206,5 @@ def map(request):
         return render(request, 'wa_anwa/index.html')
 
 def createparticipate(request):
-    Participate.objects.create(region=request.POST['region'], time=request.POST['time'], date=request.POST['date'])
-    return
+    participate = Participate.objects.create(region=request.POST['region'], time=request.POST['time'], date=request.POST['date'])
+    return JsonResponse({})
