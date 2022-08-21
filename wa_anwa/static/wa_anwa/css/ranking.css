@@ -1,0 +1,209 @@
+@font-face {
+    font-family: 'waanwafont';
+    src: url("./font/waanwafont.woff") format('woff');
+}
+  
+*{
+    font-family: 'waanwafont';
+}
+  
+
+#rankingPage_title{
+    position: absolute;
+    width: 298px;
+    height: 163.58px;
+    left: 46px;
+    top: 100px;
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 60px;
+    line-height: 69px;
+    text-align: center;
+    text-decoration-line: underline;
+    color: #000000;
+}
+
+.rankingModal{
+    position: absolute;
+    width: 362px;
+    height: 572.02px;
+    left: 15px;
+    top: 173.98px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 40px;
+
+    align-items:center;
+    justify-content:center;
+}
+
+.modalTitle{
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+#month_ranking{
+    /* position: absolute; */
+    /* width: 298px; */
+    height: 50px;
+    margin:0px;
+    left: 47px;
+    /* top: 173.98px; */
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    text-align: center;
+    color: #000000;
+}
+
+#notice{
+    /* position: absolute; */
+    width: 361px;
+    /* height: 46px; */
+    left: 98px;
+    margin:0px;
+    /* top: 217px; */
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: #000000;
+}
+
+#rankNum{
+    width: 26px;
+    height: 29px;
+    margin:0px;
+    /* left: 40px; */
+    
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 50px;
+    line-height: 58px;
+    text-align:center;
+    color: #000000;
+}
+
+.rankImg{
+    width: 46px;
+    height: 46px;
+    left: 76px;
+    border-radius: 10px;
+}
+
+.rankingLists{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.rankingList{
+    display:flex;
+    flex-direction:row;
+    align-items:center;
+    justify-content:space-around;
+    
+    width: 320px;
+    height: 58px;
+
+    margin:0px;
+    background: #FFFFFF;
+    border-radius: 20px;
+}
+
+.orderedlist{
+    align-items:center;
+    justify-content:center;
+    margin:10px;
+    padding:0px;
+}
+
+.rankNumber{
+    position:relative;
+    left:0px;
+    top:-15px;
+}
+
+#username{
+    margin:0px;
+}
+
+#wa_anwaRate{
+    margin:0px;
+}
+
+.rankPoint{
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+}
+
+#umbpoint{
+    width:20px;
+}
+
+
+/* 나의 랭킹 */
+
+#myRankTi{
+    margin:0px;
+    left: 3px;
+
+    font-family: 'Nanum SeACe';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 23px;
+    text-align: center;
+    color: #000000;
+}
+
+.myRanking{
+    position:absolute;
+    width:361px;
+    bottom:0px;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    width: 362px;
+    height: 91px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+}
+
+.myRankingBody{
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+
+    box-sizing: border-box;
+    width: 322px;
+    height: 58px;
+
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+}
+
+.myRankingNum{
+    position:relative;
+    left:0px;
+    top:-20px;
+}
+
+p{
+    font-family:'Nanum SeACe'
+}

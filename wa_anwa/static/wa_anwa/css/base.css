@@ -1,3 +1,13 @@
+@font-face {
+  font-family: 'waanwafont';
+  src: url("./font/waanwafont.woff") format('woff');
+}
+
+*{
+  font-family: 'waanwafont';
+}
+
+
 .whole_display{
     position: relative;
     width: 390px;

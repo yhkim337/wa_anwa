@@ -1,61 +1,66 @@
-{% extends 'wa_anwa/base.html' %}
+{% extends 'base.html' %}
 {% load static %}
 
+{% block style %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'wa_anwa/css/ranking.css' %}"
+/>
+{% endblock style %}
 
 {% block content %}
 <div class = "container">
-    <div class="rankingPage">랭킹페이지</div>
+    <!-- <div class="rankingPage" id="rankingPage_title">랭킹페이지</div> -->
     <div class = "rankingModal">
         <div class = "modalTitle">
-            <p>{{month}}월 와안와 랭킹</p>
+            <!-- <p id="month_ranking">{{month}}월 와안와 랭킹</p> -->
+            <!-- <p id="notice">이번 달 얻은 우산 기준입니다</p> -->
         </div>
-        <div class = "rankingSubtitle">
-            <p>이번 달 얻은 우산 기준입니다</p>
-        </div>
+
         <div class="rankingLists">
-            <ol>
+            <ol class="orderedlist">
             {% for user in export_ranking %}
             <div class="rankingList">
-                <p class = "rankNumber">{{user.0}}</p>
-                <img class="rankImg"  src="{{user.1.profile_img}}" alt="">
+                <p class ="rankNumber" id="rankNum">{{user.0}}</p>
+                <img class="rankImg"  src="{{user.1.profile_img}}" alt="프로필">
                 <div class = "rankmiddle">
                     <div class = "rankName">
-                        <p>{{user.1.username}}</p>
+                        <p id="username" style="font-size:25px;">{{user.1.username}}</p>
                     </div>
-                    <div class = "hitRate">
-                        <p>와안와율{{user.3}}%</p>
-                    
+                    <div class ="hitRate">
+                        <p id="wa_anwaRate" style="font-size:20px">와안와율{{user.3}}%</p>
                     </div>
                 </div>
-                <div class = " rankPoint">
-                    <p>+{{user.2}}점</p>
+                <div class = "rankPoint">
+                    <p style="font-size:30px;color:red">+{{user.2}}</p>
+                    <img id="umbpoint" src="{% static 'wa_anwa/img/base_imgs/우산.png' %}" alt="우산">
                 </div>
-                <img src="" alt="우산 이미지 링크">
             </div>
             {% endfor %}
             </ol>
         </div>
         <div class="myRanking">
             <div class="myRankingTitle">
-                <p>나의 랭킹</p>
+                <p id="myRankTi">나의 랭킹</p>
             </div>
             <div class="myRankingBody">
-                <div class = "myRankingNum">
+                <div class="myRankingNum" id="rankNum">
                     {{user_ranking_Num}}
                 </div>
                 <img class="rankImg"  src="{{user_ranking.profile_img}}" alt="">
                 <div class = "rankmiddle">
                     <div class = "rankName">
-                        <p>{{user_ranking.username}}</p>
+                        <p id="username" style="font-size:25px">{{user_ranking.username}}</p>
                     </div>
                     <div class = "hitRate">
-                        <p>(와안와율:{{user_HitRate}})</p>
+                        <p id="wa_anwaRate" style="font-size:20px">와안와율:{{user_HitRate}}</p>
                     </div>
                 </div>
                 <div class = " rankPoint">
-                    <p>{{user_Point}}점</p>
+                    <p style="font-size:30px;color:red">+{{user_Point}}</p>
+                    <img id="umbpoint" src="{% static 'wa_anwa/img/base_imgs/우산.png' %}" alt="우산">
                 </div>
-                <img src="" alt="우산 이미지 링크">
             </div>
         </div>
     </div>

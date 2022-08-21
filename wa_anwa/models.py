@@ -9,7 +9,7 @@ class Betting(models.Model):
     region = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.region + ' ' + self.date.strftime("%Y-%m-%d") + ' ' + str(self.time)
+        return self.region + ' ' + self.date + ' ' + self.time
 
     # https://docs.djangoproject.com/en/4.0/ref/models/constraints/#uniqueconstraint
     class Meta:
