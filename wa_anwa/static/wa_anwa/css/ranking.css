@@ -1,13 +1,3 @@
-@font-face {
-    font-family: 'waanwafont';
-    src: url("./font/waanwafont.woff") format('woff');
-}
-  
-*{
-    font-family: 'waanwafont';
-}
-  
-
 #rankingPage_title{
     position: absolute;
     width: 298px;

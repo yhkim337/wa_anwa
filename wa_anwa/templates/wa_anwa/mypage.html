@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block style %} 
-<link rel="stylesheet" href="{% static 'wa_anwa/css/mypage.css' %}">
+{% block style %}
+    <link rel="stylesheet" type="text/css" href="{% static 'wa_anwa/css/mypage.css' %}"/>
 {% endblock style %}
-
 
 {% block content %}
 <div class = 'container'>
@@ -23,6 +22,7 @@
             <p>{{month}}월 와안와 달력</p>
             <div class="calender">
                 {% for day in calender %}
+
                 
                 {% endfor %}
             </div>
@@ -56,7 +56,7 @@
             </div>
         </div>
 
+
     </div>
 </div>
-
 {% endblock content %}

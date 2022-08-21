@@ -3,11 +3,6 @@
   src: url("./font/waanwafont.woff") format('woff');
 }
 
-*{
-  font-family: 'waanwafont';
-}
-
-
 .whole_display{
     position: relative;
     width: 390px;
@@ -30,7 +25,7 @@
     height: 367px;
     left: -135px;
     top: 121px;
-    background: url(pngegg.png);
+    z-index:0;
   }
   
   #cloud_2{
@@ -39,7 +34,7 @@
     height: 236px;
     left: -66px;
     top: 693px;
-    background: url(pngegg.png);
+    z-index:0;
   }
   
   .tab_left{
@@ -68,6 +63,7 @@
   .time_left_ms{
     position:absolute;
     top:30px;
+    font-family: 'waanwafont';
   }
   
   .icon_umb_point{
@@ -91,6 +87,7 @@
   .umb_point_umb{
     position:absolute;
     top:30px;
+    font-family: 'waanwafont';
   }
   
   .tab_right{
@@ -135,4 +132,15 @@
     flex-direction:row;
     justify-content:space-around;
     align-items:center;
+  }
+
+
+  .middle-background{
+    position:absolute;
+    z-index:0;
+  }
+
+  .middle-content{
+    position:absolute;
+    z-index:1;
   }

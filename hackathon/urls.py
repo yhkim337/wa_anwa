@@ -30,9 +30,6 @@ urlpatterns = [
     path('accounts/kakao-login/', accounts.views.kakao_login, name='kakao-login'),
     path('accounts/signin/kakao/callback/', accounts.views.kakao_callback, name='kakao-callback'),
     path('social_accounts/', include('allauth.urls')),
-    
-    path('ranking/',include('wa_anwa.urls'), name ="ranking"),
-    path('mypage/',include('wa_anwa.urls'), name= 'mypage')
-    
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

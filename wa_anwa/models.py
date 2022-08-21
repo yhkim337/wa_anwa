@@ -5,11 +5,11 @@ from accounts.models import User
 
 class Betting(models.Model):
     date = models.CharField(max_length=11)
-    time = models.CharField(max_length=6)
+    time = models.IntegerField()
     region = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.region + ' ' + self.date + ' ' + self.time
+        return self.region + ' ' + self.date + ' ' + str(self.time)
 
     # https://docs.djangoproject.com/en/4.0/ref/models/constraints/#uniqueconstraint
     class Meta:
