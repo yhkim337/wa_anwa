@@ -1,3 +1,4 @@
+from http.client import HTTPResponse
 from django.shortcuts import render
 from accounts.models import User
 import datetime
@@ -8,6 +9,9 @@ from django.http import JsonResponse
 import schedule
 import time
 from datetime import date
+
+from django.views.decorators.csrf import csrf_exempt
+import json
 
 # Create your views here.
 
@@ -122,18 +126,18 @@ def my_page(request):
                 result = Result.filter(participation = participate)
                 
 
-                    # 적중률 계산을 위해서 성공 실패 횟수를 저장
-                    if result.win == participate.choice:
-                        hitRate[0] += 1
-                        calender[day][0] = 1
-                        calender[day][2] = participate.point
+                # 적중률 계산을 위해서 성공 실패 횟수를 저장
+                if result.win == participate.choice:
+                    hitRate[0] += 1
+                    calender[day][0] = 1
+                    calender[day][2] = participate.point
 
-                    elif result.win != participate.choice:
-                        hitRate[1] += 1
-                        calender[day][0] = 2
-                        calender[day][2] = -1 * participate.point
-            elif len(participates) != 0:
-                return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'calender': calender, 'month':m})
+                elif result.win != participate.choice:
+                    hitRate[1] += 1
+                    calender[day][0] = 2
+                    calender[day][2] = -1 * participate.point
+                elif len(participates) != 0:
+                    return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'calender': calender, 'month':m})
 
     today=date.today()
     c=cd.Calendar(firstweekday=1)
@@ -160,9 +164,6 @@ def my_page(request):
     else:
         user_hitRate = hitRate[0]/(hitRate[0] + hitRate[1]) *100
 
-                elif result.win == False:
-                    hitRate[1] += 1
-                    calender[day] = False
     user_hitRate = hitRate[0]//hitRate[0] + hitRate[1]
 
     return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
@@ -198,5 +199,15 @@ def createBetting(time):
         Betting.objects.create(region=i, time=time, date=date)
     return
 
-schedule.every().day.at("8:00").do(createBetting(8))
-schedule.every().day.at("18:00").do(createBetting(18))
+#schedule.every().day.at("08:00").do(createBetting(8))
+#schedule.every().day.at("18:00").do(createBetting(18))
+
+def get_answer(request):
+    return render(request, 'wa_anwa/weather_api.html')
+
+@csrf_exempt
+def set_answer(request):
+    request_body = json.loads(request.body)
+    answer = request_body['answer']
+    print(answer)
+    return JsonResponse(answer)

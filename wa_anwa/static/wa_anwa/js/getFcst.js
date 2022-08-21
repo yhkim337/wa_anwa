@@ -1,5 +1,7 @@
+
+
 const API_ROOT = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/';
-const API_KEY = process.env.FCST_REST_API_KEY;
+const API_KEY = "ALgusVmrIKpNg9QD2h6tcFlDtN3lxtPwO15rB/wxF4ekCy6KVSUdR98lYEpWqVKsr1v39FK0Kll5YEy1wzKESw==";//process.env.FCST_REST_API_KEY;
 const region = {x:61, y:126};
 
 
@@ -72,6 +74,7 @@ const getShortFcstList = async (region, cb) => {
     
     sb = getShortBaseTime();
 
+    
     const ptyParam = { // 강수상태 조회를 위한 param
             ServiceKey: API_KEY,
             pageNo: 2,
@@ -165,10 +168,19 @@ const getLongFcstList = async (region) => {
 }
 
 
+const showFcstList = async (region) => {
+    const shortFcstList = await getShortFcstList(region);
+    const longFcstList = await getLongFcstList(region);
+    
+    const now = getNowDateTime();
+    
+    if (now.time.hour === '13' || now.time.hour === '17'){
+        console.log('hello');
+        axios.post('/wa_anwa/set_answer', {'answer': shortFcstList[0]});
+    }
 
-const setList = async () => {
-    const shortData = await getShortFcstList(region);
-    const longData = await getLongFcstList(region);
-    
-    
+    console.log(longFcstList);
+    console.log(now);
 }
+
+showFcstList(region);

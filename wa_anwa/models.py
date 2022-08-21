@@ -12,13 +12,13 @@ class Betting(models.Model):
         return self.region + ' ' + self.date.strftime("%Y-%m-%d") + ' ' + str(self.time)
 
     # https://docs.djangoproject.com/en/4.0/ref/models/constraints/#uniqueconstraint
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=['date', 'time', 'region'],
-                name='unique_betting'
-            )
-        ]
+    # class Meta:
+    #     constraints = [
+    #         models.UniqueConstraint(
+    #             fields=['date', 'time', 'region'],
+    #             name='unique_betting'
+    #         )
+    #     ]
 
 
 class Participate(models.Model):
