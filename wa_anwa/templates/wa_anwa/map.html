@@ -1,12 +1,16 @@
 {% extends "base.html" %}
-{% load static %}
-{% comment %} {% load sass_tags %} {% endcomment %}
+{% load static %} 
 {% block style %}
-<link rel="stylesheet" type="text/css" href="{% static 'wa_anwa/css/map.css' %}"/>
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'wa_anwa/css/map.css' %}"
+/>
 {% endblock style %}
-{% block js %} 
-    <script type="module" src="{% static 'wa_anwa/js/map.js' %}"></script>
+{% block js %}
+<script type="module" src="{% static 'wa_anwa/js/map.js' %}"></script>
 {% endblock js %}
+
 {% block content %}
 <body>
     <div id='map-background'></div>

@@ -8,7 +8,7 @@ from django.http import JsonResponse
 import schedule
 import time
 from datetime import date
-
+from datetime import datetime as dt
 # Create your views here.
 
 def time(request):
@@ -33,6 +33,7 @@ def ranking(request):
     #  유저 모델을 불러옴
     users = User.objects.all()
     # users.sort(key = lambda x:x[0])
+    print(users)
     len_user = len(users)
 
     # 유저 별 달의 포인트와 적중률을 담을 배열 생성
@@ -40,11 +41,20 @@ def ranking(request):
     all_HitRate = [[0]**len_user for _ in range(2)]
 
 
-    # 이번 달에 진행한 배팅을 모두 불러온다.
+   # 이번 달에 진행한 배팅을 모두 불러온다.
     today = datetime.date.today()
     m = today.month
-    bettings = Betting.objects.filter(date_year='2022', date_month = m)
-    # 사용자 별로 이번 달의 배팅 안에서 연결된 Participate 불러오기 
+    if len(str(m)) == 1:
+        m = '0'+str(m)
+    else:
+        m = str(m) 
+    search = str(year) + '-' + m
+    bettings = Betting.objects.filter(date__contains=search)
+
+        # 사용자 별로 이번 달의 배팅 안에서 연결된 Participate 불러오기 
+
+
+    # print("betting:",bettings)
     for k in range(len_user):
         temp_user = users[k]
         for i in range(len(bettings)):
@@ -83,14 +93,20 @@ def ranking(request):
     for i in range(len(ranking)):
         temp = ranking[i][2]
         if temp.pk == user_pk:
-            user_ranking.append(i)
-            user_ranking.append(temp)
+            
+            user_ranking = temp
+            user_ranking_Num = i
 
-    return render( request, 'wa_anwa/ranking.html', {'ranking':ranking, 'user_ranking':user_ranking, 'month': m })
+            if all_HitRate[0][i] == 0:
+                user_HitRate = 0
+            else:
+                user_HitRate = all_HitRate[0][i]/(all_HitRate[0][i] + all_HitRate[1][i]) *100
+
+            user_Point = copy_all_Participate[temp.pk-1]
+            break
 
 
-
-def my_page(request):
+def mypage(request):
     # 유저 객체를 불어와서 전달
     now_user = request.user
     my_user = User.objects.get(pk = now_user.pk)
@@ -98,8 +114,7 @@ def my_page(request):
     # 이번 달에 진행한 배팅을 모두 불러온다.
     today = datetime.date.today()
     m = today.month
-    bettings = Betting.objects.filter(date_year='2022', date_month = m)
-
+    bettings = Betting.objects.filter()
 
     # 이번 달 진행한 배팅을 불러와 적중률 계산하고 달력 표시용 데이터 수집
     hitRate = []
@@ -119,13 +134,44 @@ def my_page(request):
                     calender[day][0] = 1
                     calender[day][2] = participate.point
 
-                elif result.win == False:
-                    hitRate[1] += 1
-                    calender[day] = False
-    user_hitRate = hitRate[0]//hitRate[0] + hitRate[1]
-    return render(request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
-  
+                    elif result.win != participate.choice:
+                        hitRate[1] += 1
+                        calender[day][0] = 2
+                        calender[day][2] = -1 * participate.point
+            elif len(participates) != 0:
+                return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'calender': calender, 'month':m})
 
+    today=date.today()
+    c=cd.Calendar(firstweekday=1)
+    monthcal=[]
+    # 주 단위로 나눠서 담기
+    for i in c.monthdayscalendar(today.year,today.month):
+        
+        weekcal=[]
+        for j in range(len(i)):
+            buffer = [0,0,0]
+            for k in range(31):
+                if i[j] == calender[k][1]:
+                    print(i[j])
+                    buffer[1] = i[j]
+                    buffer[0] = calender[k][0]
+                    buffer[2] = calender[k][2]
+                    break
+            weekcal.append(buffer)
+        monthcal.append(weekcal)
+
+
+    if hitRate[0] == 0:
+        user_hitRate = 0
+    else:
+        user_hitRate = hitRate[0]/(hitRate[0] + hitRate[1]) *100
+
+
+    return render( request, 'wa_anwa/mypage.html', {'monthcal':monthcal,'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
+
+
+def betting(request,id):
+    return render(request, 'wa_anwa/map.html', {'id':id})
 
 def map(request):
     user = request.user
