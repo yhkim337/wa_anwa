@@ -1,19 +1,19 @@
-{% extends 'wa_anwa/base.html' %}
-{% load static %} 
+{% extends "base.html" %}
+{% load static %}
 {% block style %}
-    <link rel="stylesheet" type="text/css" href="{% sass_src 'wa_anwa/css/map.css' %}"/>
+    <link rel="stylesheet" type="text/css" href="{% static sass_src 'wa_anwa/css/map.css' %}"/>
 {% endblock style %}
-{% block js %} 
+{% block js %}
+    <script src="{% static 'wa_anwa/js/time.js' %}"></script>
 {% endblock js %}
 {% block content %}
-
     <div style='background: skyblue'>
         <p>배팅 남은 시간</p>
         <div id="HourCountdown"></div>
     </div>
     <div id="map-background">
         <div id="question">오늘 저녁 6시에 비가 올까?</div>
-        <svg style='background: rgba(255,255,255,0);overflow:visible' height="80" width="80" viewBox="0 -300 200 200" xmlns="http://www.w3.org/2000/svg">
+        <svg id="seoulmap" style='background: rgba(255,255,255,0);overflow:visible' height="80" width="80" viewBox="0 -300 200 200" xmlns="http://www.w3.org/2000/svg">
             <defs>
             <filter id="dropshadow">
                 <feGaussianBlur in="SourceAlpha" stdDeviation="7" />

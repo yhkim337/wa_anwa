@@ -121,7 +121,7 @@ def my_page(request):
 
 
 def betting(request, id):
-    return render(request, 'wa_anwa/betting.html', {'id':id})
+    return render(request, 'wa_anwa/map.html', {'id':id})
 
 def map(request):
     user = request.user

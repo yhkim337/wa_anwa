@@ -16,6 +16,7 @@
   
   #cloud_1{
     position: absolute;
+    opacity: 0.7;
     width: 800px;
     height: 367px;
     left: -135px;
