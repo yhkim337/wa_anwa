@@ -17,13 +17,13 @@ def time(request):
     today6pm = now.replace(hour=18, minute=0, second=0, microsecond=0)
     if now < today8am:
         time=today8am
-        return JsonResponse({'hour': 8, 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today8am - datetime.timedelta(hours=4)})
+        return JsonResponse({'hour': 8, 'date':time.isoformat()[:10], 'endtime':today8am - datetime.timedelta(hours=4)})
     elif now >= today8am and now < today6pm:
         time=today6pm
-        return JsonResponse({'hour': 18, 'day':time.day, 'month':time.month, 'year':time.year, 'endtime':today6pm - datetime.timedelta(hours=4)})
+        return JsonResponse({'hour': 18, 'date':time.isoformat()[:10], 'endtime':today6pm - datetime.timedelta(hours=4)})
     else:
         time = today8am + datetime.timedelta(days=1)
-        return JsonResponse({'hour': 8, 'day':time.day, 'month':time.month ,'year':time.year,'endtime':today8am + datetime.timedelta(hours=20)})
+        return JsonResponse({'hour': 8, 'date':time.isoformat()[:10],'endtime':today8am + datetime.timedelta(hours=20)})
 
 def index(request):
     return render(request, 'wa_anwa/index.html')
@@ -124,10 +124,6 @@ def my_page(request):
 
     return render( request, 'wa_anwa/mypage.html', {'my_user':my_user, 'user_hitRate':user_hitRate, 'calender': calender, 'month':m})
 
-
-def betting(request):
-    return render(request, 'wa_anwa/betting.html')
-
 def map(request):
     user = request.user
     if user.is_authenticated:
@@ -155,5 +151,7 @@ def createBetting(time):
         Betting.objects.create(region=i, time=time, date=date)
     return ()
 
+
 # schedule.every().day.at("08:00").do(createBetting(8))
 # schedule.every().day.at("18:00").do(createBetting(18))
+
