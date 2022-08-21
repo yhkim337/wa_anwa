@@ -3,14 +3,13 @@ from accounts.models import User
 
 # Create your models here.
 
-
 class Betting(models.Model):
     date = models.CharField(max_length=11)
     time = models.IntegerField(max_length=2)
     region = models.CharField(max_length=10)
 
     def __str__(self):
-        return self.region + ' ' + self.date + ' ' + self.time
+        return self.region + ' ' + self.date.strftime("%Y-%m-%d") + ' ' + str(self.time)
 
     # https://docs.djangoproject.com/en/4.0/ref/models/constraints/#uniqueconstraint
     class Meta:
@@ -39,6 +38,4 @@ class Result(models.Model):
     participation = models.OneToOneField(Participate, on_delete=models.CASCADE, related_name="result")
     point = models.IntegerField()
     win = models.BooleanField()
-    checked = models.BooleanField(default=False)
-
-
+    checked = models.BooleanField()

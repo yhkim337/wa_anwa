@@ -31,5 +31,8 @@ urlpatterns = [
     path('accounts/signin/kakao/callback/', accounts.views.kakao_callback, name='kakao-callback'),
     path('social_accounts/', include('allauth.urls')),
     
+    path('ranking/',include('wa_anwa.urls')),
+    path('mypage/',include('wa_anwa.urls'))
+    
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

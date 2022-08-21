@@ -48,6 +48,3 @@ const Disablesubmit = () => {
     document.getElementById("submitbutton").addEventListener("click", bettingSubmit())
 })();
 
-
-
-

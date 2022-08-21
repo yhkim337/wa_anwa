@@ -1,10 +1,13 @@
 from django.shortcuts import render
 from accounts.models import User
 import datetime
+import calendar as cd
+from datetime import date
 from wa_anwa.models import Betting,Participate,Answer,Result
 from django.http import JsonResponse
 import schedule
 import time
+from datetime import date
 
 # Create your views here.
 
