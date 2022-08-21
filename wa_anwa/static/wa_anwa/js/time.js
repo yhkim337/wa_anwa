@@ -1,5 +1,3 @@
-
-
 (async ()=> {
     const response = await axios.get('time');
     CountDownTimer(response.data.endtime, 'HourCountdown');
@@ -19,8 +17,8 @@ function CountDownTimer(dt, id) {
       // 시간 종료 시 뜨는 문구
         if (distance < 0) {
             clearInterval(timer);
-            document.getElementById("timelimit").innerHTML = '카운트다운이 끝났습니다. 곧 결과를 공개합니다!';
-            return;
+            document.getElementById("HourCountdown").innerHTML = '카운트다운이 끝났습니다. 곧 결과를 공개합니다!';
+            return
         }
     var days = Math.floor(distance / _day);
     var hours = Math.floor((distance % _day) / _hour);

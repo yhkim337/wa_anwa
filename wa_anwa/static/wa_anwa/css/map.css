@@ -37,7 +37,7 @@
   width: 362px;
   height: 522px;
   left: 14px;
-  top: 171px;
+  top: 150px;
   background: rgba(255, 255, 255, 0.5);
   border-radius: 40px;
   z-index: -1;
@@ -63,7 +63,7 @@
   width: 80px;
   height: 64.38px;
   left: 50px;
-  top: 550px;
+  top: 500px;
 }
 
 #selectprovince {
@@ -71,7 +71,7 @@
   width: 271px;
   height: 51px;
   left: 90px;
-  top: 575px;
+  top: 525px;
   font-family: 'waanwafont';
   font-style: normal;
   font-weight: 400;
@@ -222,5 +222,20 @@ border-radius: 20px;
   line-height: 57px;
   text-align: center;
 
+  color: #000000;
+}
+
+#HourCountdown {
+  position: absolute;
+  width: 271px;
+  height: 51px;
+  left: 50px;
+  top: 600px;
+  font-family: 'waanwafont';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 34px;
+  text-align: center;
   color: #000000;
 }
