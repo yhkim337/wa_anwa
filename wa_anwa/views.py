@@ -3,6 +3,8 @@ from accounts.models import User
 import datetime
 from wa_anwa.models import Betting,Participate,Answer,Result
 from django.http import JsonResponse
+import schedule
+import time
 
 # Create your views here.
 
@@ -139,5 +141,16 @@ def map(request):
         return render(request, 'wa_anwa/index.html')
 
 def createparticipate(request):
-    participate = Participate.objects.create(region=request.POST['region'], time=request.POST['time'], date=request.POST['date'])
+    betting = Betting.objects.filter(region=request.POST['region'], time=request.POST['time'], date=request.POST['date'])
+    Participate.objects.create(user=request.user, betting=betting, choice=request.POST['choice'], point=request.POST['point'])
     return JsonResponse({})
+
+def createBetting(time):
+    regionlist = ['종로구', '중구', '용산구', '성동구', '광진구', '동대문구', '중랑구', '성북구', '강북구', '도봉구', '노원구', '은평구', '서대문구', '마포구', '양천구', '강서구', '구로구', '금천구', '영등포구', '동작구', '관악구', '서초구', '강남구', '송파구', '강동구']
+    date=datetime.date.today().isoformat()
+    for i in regionlist:
+        Betting.objects.create(region=i, time=time, date=date)
+    return
+
+schedule.every().day.at("8:00").do(createBetting(8))
+schedule.every().day.at("18:00").do(createBetting(18))

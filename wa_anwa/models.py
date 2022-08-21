@@ -6,7 +6,7 @@ from accounts.models import User
 
 class Betting(models.Model):
     date = models.CharField(max_length=11)
-    time = models.CharField(max_length=6)
+    time = models.IntegerField(max_length=2)
     region = models.CharField(max_length=10)
 
     def __str__(self):

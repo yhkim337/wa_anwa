@@ -15,12 +15,14 @@ function showbettingmodal(region) {
 
 const bettingSubmit = async () => {
     region = document.getElementById("region-name").innerHTML
+    wa = document.getElementById("wa")
     const data = new FormData();
     data.append("region", region);
     data.append("time", a.data.hour);
     data.append("date", `${a.data.year}.${a.data.month}.${a.data.day}`);
+    data.append("choice", wa.checked ? True:False);
+    data.append("point", document.getElementById("pointselect").value);
     const response = await axios.post('wa_anwa/createparticipate');
-    wa = document.getElementById("wa")
     document.getElementById(region).style.backgroundColor =  wa.checked ? "blue" : "black";
     bettingmodal = document.getElementById("bettingmodal");
     bettingmodal.classList.remove("show");
@@ -45,5 +47,7 @@ const Disablesubmit = () => {
     })
     document.getElementById("submitbutton").addEventListener("click", bettingSubmit())
 })();
+
+
 
 
